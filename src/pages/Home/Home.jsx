@@ -1,26 +1,13 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { Search, Hero, CategoryCard } from '../../components/index';
+import { useAxios } from '../../hooks/useAxios';
 
 export const Home = () => {
-  const [categories, setCategories] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoaderActive, setIsLoaderActive] = useState(true);
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data, status } = await axios.get('/api/categories');
-        if (status === 200) {
-          setCategories(data.categories);
-        }
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoaderActive(false);
-      }
-    })();
-  }, []);
+  const {
+    data: categories,
+    isLoaderActive,
+    error,
+  } = useAxios('/api/categories');
   return (
     <div>
       <Search />

@@ -1,0 +1,19 @@
+.navbar {
+  background-color: transparent;
+  border-bottom: 0.5px solid var(--gray);
+  padding: 0.5rem 1rem;
+}
+
+.navbar a {
+  color: var(--black);
+  display: inline-block;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.icon {
+  font-size: 2rem;
+}

@@ -1,7 +1,7 @@
 .navbar {
   background-color: transparent;
   border-bottom: 0.5px solid var(--gray);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.8rem;
 }
 
 .navbar a {

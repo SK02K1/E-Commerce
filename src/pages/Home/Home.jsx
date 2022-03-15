@@ -1,10 +1,10 @@
-import { Wrapper, Search, Hero } from '../../components/index';
+import { Search, Hero } from '../../components/index';
 
 export const Home = () => {
   return (
-    <Wrapper>
+    <div>
       <Search />
       <Hero />
-    </Wrapper>
+    </div>
   );
 };

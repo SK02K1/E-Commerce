@@ -8,7 +8,7 @@ export const Hero = () => {
         <p className={HeroStyles.heroDescription}>
           Marketplace for filmmakers and photographers
         </p>
-        <button className='btn btn-primary'>SHOP NOW</button>
+        <button className='btn btn-primary m-xs-t'>SHOP NOW</button>
       </div>
       <img
         src='https://focus-store-sk02k1.netlify.app/assets/hero%20section/hero-banner.jpeg'

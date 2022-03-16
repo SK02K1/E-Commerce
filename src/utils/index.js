@@ -1,0 +1,1 @@
+export { sliceProductName } from './sliceProductName';

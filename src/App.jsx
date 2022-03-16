@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { Navbar, Wrapper } from './components/index';
-import { Home } from './pages/index';
+import { Home, Products } from './pages/index';
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
       <Wrapper>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/products' element={<Products />} />
         </Routes>
       </Wrapper>
     </div>

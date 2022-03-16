@@ -3,6 +3,7 @@ import {
   Loader,
   ProductCard,
   SmallScreenFilter,
+  LargeScreenFilter,
 } from '../../components/index';
 import { useAxios } from '../../hooks';
 import './Products.css';
@@ -19,6 +20,7 @@ export const Products = () => {
       <Search />
       <SmallScreenFilter />
       <main className='main-wrapper'>
+        <LargeScreenFilter />
         {isLoaderActive ? (
           <Loader />
         ) : (

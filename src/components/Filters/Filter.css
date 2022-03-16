@@ -66,6 +66,10 @@
   display: none;
 }
 
+.sidebar-filter input {
+  margin-right: 0.5rem;
+}
+
 .filter-controls {
   display: flex;
   justify-content: flex-end;

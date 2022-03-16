@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import HeroStyles from './Hero.module.css';
 
 export const Hero = () => {
@@ -8,7 +9,9 @@ export const Hero = () => {
         <p className={HeroStyles.heroDescription}>
           Marketplace for filmmakers and photographers
         </p>
-        <button className='btn btn-primary m-xs-t'>SHOP NOW</button>
+        <Link className='btn btn-primary m-xs-t' to='/products'>
+          SHOP NOW
+        </Link>
       </div>
       <img
         src='https://focus-store-sk02k1.netlify.app/assets/hero%20section/hero-banner.jpeg'

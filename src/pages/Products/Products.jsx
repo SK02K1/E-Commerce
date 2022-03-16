@@ -1,4 +1,9 @@
-import { Search, Loader, ProductCard } from '../../components/index';
+import {
+  Search,
+  Loader,
+  ProductCard,
+  SmallScreenFilter,
+} from '../../components/index';
 import { useAxios } from '../../hooks';
 import './Products.css';
 
@@ -12,6 +17,7 @@ export const Products = () => {
   return (
     <>
       <Search />
+      <SmallScreenFilter />
       <main className='main-wrapper'>
         {isLoaderActive ? (
           <Loader />

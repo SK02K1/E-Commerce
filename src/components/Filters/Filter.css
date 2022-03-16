@@ -1,0 +1,108 @@
+.filter-mobile {
+  border: 1px solid var(--black);
+  position: fixed;
+  bottom: 0.5rem;
+  left: 50%;
+  width: 90%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  z-index: 1;
+}
+
+.filter-header,
+.filter-header > div {
+  display: flex;
+  align-items: center;
+}
+
+.filter-header {
+  background-color: var(--gray);
+  color: var(--white);
+  justify-content: space-between;
+  padding: 0.5rem 1.5rem;
+}
+
+.icon-filter {
+  margin-right: 0.5rem;
+}
+
+.icon-expand {
+  cursor: pointer;
+  transition: transform 100ms ease;
+}
+
+.filter-body {
+  height: 0;
+  overflow-y: scroll;
+}
+
+.filter-section {
+  padding: 1rem 2rem;
+}
+
+.filter-section label {
+  display: block;
+  margin: 0.5rem 0rem;
+}
+
+.filter-body input {
+  margin-right: 0.5rem;
+}
+
+.reveal-filter-tray {
+  height: 80vh;
+}
+
+.toggle-expand {
+  transform: rotate(180deg);
+}
+
+.main-wrapper {
+  display: flex;
+}
+
+.sidebar-filter {
+  flex-basis: 20rem;
+  display: none;
+}
+
+.filter-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1rem;
+}
+
+.sidebar-filter .filter-section {
+  padding-left: 0;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding-bottom: 8rem;
+}
+
+.slider {
+  width: 100%;
+}
+
+.slider-range {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (min-width: 600px) {
+  .filter-mobile {
+    display: none;
+  }
+
+  .filter-controls {
+    justify-content: space-between;
+    padding: 0 0.5rem 0 0;
+  }
+
+  .sidebar-filter {
+    display: block;
+  }
+}

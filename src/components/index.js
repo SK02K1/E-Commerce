@@ -3,3 +3,4 @@ export { Search } from './Search/Search';
 export { Wrapper } from './Wrapper/Wrapper';
 export { Hero } from './Hero/Hero';
 export { CategoryCard } from './Category Card/CategoryCard';
+export { Loader } from './Loader/Loader';

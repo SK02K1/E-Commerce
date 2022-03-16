@@ -1,0 +1,22 @@
+.navbar {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-bottom: 0.5px solid var(--gray);
+  padding: 0.5rem 0.8rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar a {
+  color: var(--black);
+  display: inline-block;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.icon {
+  font-size: 2rem;
+}

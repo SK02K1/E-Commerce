@@ -1,0 +1,52 @@
+.heroSection {
+  max-height: 70vh;
+  margin: 2rem 0;
+  border-radius: var(--br-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, #00000088 30%, #ffffff44 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--white);
+}
+
+.heroTitle,
+.heroDescription {
+  margin: 0.5rem 0rem;
+}
+
+.heroTitle {
+  line-height: 1.2rem;
+}
+
+.heroDescription {
+  letter-spacing: 1.05px;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+@media screen and (min-width: 768px) {
+  .heroTitle,
+  .heroDescription {
+    margin: 1rem 0rem;
+  }
+
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .heroDescription {
+    font-size: 1.5rem;
+  }
+}

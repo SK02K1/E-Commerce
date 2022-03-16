@@ -1,0 +1,17 @@
+.searchBar {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--black);
+  margin: 2rem 0rem;
+}
+
+.searchBarIcon {
+  padding: 0.5rem 1rem 0.5rem 1.6rem;
+}
+
+.searchBar input {
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  flex-grow: 1;
+}

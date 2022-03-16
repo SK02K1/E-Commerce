@@ -3,10 +3,11 @@ import { useAxios } from '../../hooks/useAxios';
 
 export const Home = () => {
   const {
-    data: categories,
+    data: { categories },
     isLoaderActive,
     error,
   } = useAxios('/api/categories');
+
   return (
     <div>
       <Search />

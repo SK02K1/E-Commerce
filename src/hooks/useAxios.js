@@ -10,7 +10,7 @@ export const useAxios = (url) => {
       try {
         const { data, status } = await axios.get(url);
         if (status === 200) {
-          setData(data.categories);
+          setData(data);
         }
       } catch (error) {
         setError(error);

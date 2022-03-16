@@ -17,9 +17,7 @@ export const ProductCard = ({ itemInfo: { name, price, img, rating } }) => {
         <h4 className='text-sm'>{rating}/5</h4>
       </div>
       <div className='card-footer m-sm-tb'>
-        <button className='btn btn-primary card-btn' href='#'>
-          Add to cart
-        </button>
+        <button className='btn btn-primary card-btn'>Add to cart</button>
       </div>
     </div>
   );

@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
-import HeroStyles from './Hero.module.css';
-
+import './Hero.css';
 export const Hero = () => {
   return (
-    <header className={HeroStyles.heroSection}>
-      <div className={HeroStyles.overlay}>
-        <h1 className={HeroStyles.heroTitle}>Focus Store</h1>
-        <p className={HeroStyles.heroDescription}>
+    <header className='hero-section'>
+      <div className='overlay'>
+        <h1 className='hero-title'>Focus Store</h1>
+        <p className='hero-description'>
           Marketplace for filmmakers and photographers
         </p>
         <Link className='btn btn-primary m-xs-t' to='/products'>

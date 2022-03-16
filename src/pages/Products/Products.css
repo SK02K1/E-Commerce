@@ -1,8 +1,8 @@
-.mainWrapper {
+.main-wrapper {
   display: flex;
 }
 
-.mainContent {
+.main-content {
   flex-grow: 1;
   padding: 2rem 0;
 }

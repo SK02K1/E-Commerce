@@ -1,6 +1,6 @@
 import { Search, Loader, ProductCard } from '../../components/index';
 import { useAxios } from '../../hooks';
-import ProductsStyles from './Products.module.css';
+import './Products.css';
 
 export const Products = () => {
   const {
@@ -12,11 +12,11 @@ export const Products = () => {
   return (
     <>
       <Search />
-      <main className={ProductsStyles.mainWrapper}>
+      <main className='main-wrapper'>
         {isLoaderActive ? (
           <Loader />
         ) : (
-          <div className={`grid-container auto ${ProductsStyles.mainContent}`}>
+          <div className='grid-container auto main-content'>
             {products.map((itemInfo) => (
               <ProductCard key={itemInfo.id} itemInfo={itemInfo} />
             ))}

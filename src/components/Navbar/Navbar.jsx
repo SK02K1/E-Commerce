@@ -1,18 +1,17 @@
 import { Link } from 'react-router-dom';
-import NavbarStyles from './Navbar.module.css';
+import './Navbar.css';
 
 export const Navbar = () => {
   return (
-    <nav className={`navbar ${NavbarStyles.navbar}`}>
-      <div className={NavbarStyles.logo}>
+    <nav className='navbar'>
+      <div className='logo'>
         <Link to='/'>FS.</Link>
       </div>
-
       <ul className='links'>
         <li>
           <Link to='/cart' className='nav-link'>
             <div className='icon-badge'>
-              <span className={`material-icons-outlined ${NavbarStyles.icon}`}>
+              <span className='material-icons-outlined icon'>
                 shopping_cart
               </span>
               <div>0</div>
@@ -22,7 +21,7 @@ export const Navbar = () => {
         <li>
           <Link to='/wishlist' className='nav-link'>
             <div className='icon-badge'>
-              <span className={`material-icons-outlined ${NavbarStyles.icon}`}>
+              <span className='material-icons-outlined icon'>
                 favorite_border
               </span>
               <div>0</div>
@@ -32,9 +31,7 @@ export const Navbar = () => {
         <li>
           <Link to='/profile' className='nav-link'>
             <div className='icon-badge'>
-              <span className={`material-icons-outlined ${NavbarStyles.icon}`}>
-                person
-              </span>
+              <span className='material-icons-outlined icon'>person</span>
             </div>
           </Link>
         </li>

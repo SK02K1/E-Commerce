@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { Navbar, Wrapper } from './components';
-import { Home, Products } from './pages';
+import { Home, Login, Products } from './pages';
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/products' element={<Products />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </Wrapper>
     </div>

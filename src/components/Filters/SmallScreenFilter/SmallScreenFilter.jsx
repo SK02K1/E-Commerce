@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useProducts } from '../../../contexts/index';
-import { FILTER_ACTIONS } from '../../../utils/index';
+import { useProducts } from '../../../contexts';
+import { FILTER_ACTIONS } from '../../../utils';
 import '../Filter.css';
 import {
   PriceFilter,

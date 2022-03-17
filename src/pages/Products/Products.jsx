@@ -4,8 +4,8 @@ import {
   ProductCard,
   SmallScreenFilter,
   LargeScreenFilter,
-} from '../../components/index';
-import { useProducts } from '../../contexts/index';
+} from '../../components';
+import { useProducts } from '../../contexts';
 import { useAxios } from '../../hooks';
 import './Products.css';
 import {
@@ -14,7 +14,7 @@ import {
   filterByRating,
   filterByCategory,
   filterByPrice,
-} from '../../utils/index';
+} from '../../utils';
 
 export const Products = () => {
   const {

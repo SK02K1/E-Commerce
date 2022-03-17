@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import { FILTER_ACTIONS, ratings } from '../../../utils';
-import { useProducts } from '../../../contexts/index';
+import { useProducts } from '../../../contexts';
 
 export const RatingFilter = () => {
   const { state, dispatch } = useProducts();

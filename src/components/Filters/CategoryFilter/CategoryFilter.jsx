@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import { categories, FILTER_ACTIONS } from '../../../utils';
-import { useProducts } from '../../../contexts/index';
+import { useProducts } from '../../../contexts';
 
 export const CategoryFilter = () => {
   const { state, dispatch } = useProducts();

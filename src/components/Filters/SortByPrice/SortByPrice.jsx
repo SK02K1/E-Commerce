@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
-import { FILTER_ACTIONS, sortBy } from '../../../utils/index';
-import { useProducts } from '../../../contexts/index';
+import { FILTER_ACTIONS, sortBy } from '../../../utils';
+import { useProducts } from '../../../contexts';
 
 export const SortByPrice = () => {
   const { state, dispatch } = useProducts();

@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
-import { productsReducer } from '../reducers/index';
+import { productsReducer } from '../reducers';
 
 const ProductsContext = createContext(null);
 

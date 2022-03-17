@@ -1,5 +1,5 @@
-import { Search, Hero, CategoryCard, Loader } from '../../components/index';
-import { useAxios } from '../../hooks/index';
+import { Search, Hero, CategoryCard, Loader } from '../../components';
+import { useAxios } from '../../hooks';
 
 export const Home = () => {
   const {

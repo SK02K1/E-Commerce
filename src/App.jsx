@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import { Navbar, Wrapper } from './components/index';
-import { Home, Products } from './pages/index';
+import { Navbar, Wrapper } from './components';
+import { Home, Products } from './pages';
 
 function App() {
   return (

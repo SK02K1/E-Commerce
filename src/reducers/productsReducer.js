@@ -1,4 +1,4 @@
-import { FILTER_ACTIONS } from '../utils/index';
+import { FILTER_ACTIONS } from '../utils';
 import { initialState } from '../contexts/products-context';
 
 export const productsReducer = (state, { type, payload }) => {

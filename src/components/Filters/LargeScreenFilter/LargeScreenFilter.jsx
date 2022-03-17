@@ -1,4 +1,4 @@
-import { useProducts } from '../../../contexts/index';
+import { useProducts } from '../../../contexts';
 import { FILTER_ACTIONS } from '../../../utils';
 import '../Filter.css';
 import {

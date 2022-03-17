@@ -1,14 +1,23 @@
 import './Forms.css';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { testCredential } from '../../utils';
+import { ClipLoader } from 'react-spinners';
+import { useAuth } from '../../contexts';
+
+const formInitialState = {
+  email: '',
+  password: '',
+  rememberMe: false,
+};
 
 export const LoginForm = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    rememberMe: false,
-  });
+  const [formData, setFormData] = useState(formInitialState);
+  const [isLoggingIn, setIsLogginIn] = useState(false);
+  const { updateEncodedToken } = useAuth();
+  const { email, password, rememberMe } = formData;
+  const navigate = useNavigate();
 
   const handleInput = (e) =>
     setFormData((prevFormData) => ({
@@ -22,10 +31,33 @@ export const LoginForm = () => {
       [e.target.name]: e.target.checked,
     }));
 
-  const handleTestCredential = () => setFormData(testCredential);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLogginIn(true);
+    try {
+      const {
+        data: { encodedToken },
+        status,
+      } = await axios.post('/api/auth/login', {
+        email,
+        password,
+      });
+      if (status === 200) {
+        setIsLogginIn(false);
+        updateEncodedToken(encodedToken);
+        setFormData(formInitialState);
+        navigate('/');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleTestCredential = () =>
+    setFormData({ ...testCredential, rememberMe: true });
 
   return (
-    <form className='form'>
+    <form onSubmit={handleSubmit} className='form'>
       <h1 className='text-xl text-center m-xs-tb'>Login</h1>
       <label className='m-sm-t' htmlFor='email'>
         Email address
@@ -36,7 +68,7 @@ export const LoginForm = () => {
         type='email'
         name='email'
         id='email'
-        value={formData.email}
+        value={email}
         placeholder='Enter your email'
         required
       />
@@ -49,7 +81,7 @@ export const LoginForm = () => {
         type='password'
         name='password'
         id='password'
-        value={formData.password}
+        value={password}
         placeholder='Enter your password'
         required
       />
@@ -59,12 +91,16 @@ export const LoginForm = () => {
           type='checkbox'
           name='rememberMe'
           id='remember-me'
-          checked={formData.rememberMe}
+          checked={rememberMe}
         />
         <span className='text-sm m-xs-l'>Remember me</span>
       </label>
       <button type='submit' className='btn btn-primary m-sm-t'>
-        Login
+        {isLoggingIn ? (
+          <ClipLoader color='#fff' size={15} speedMultiplier={2} />
+        ) : (
+          'Login'
+        )}
       </button>
       <button
         onClick={handleTestCredential}

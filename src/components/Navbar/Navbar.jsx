@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../contexts';
 import './Navbar.css';
 
 export const Navbar = () => {
+  const { encodedToken } = useAuth();
   return (
     <nav className='navbar'>
       <div className='logo'>
@@ -29,11 +31,19 @@ export const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to='/profile' className='nav-link'>
-            <div className='icon-badge'>
-              <span className='material-icons-outlined icon'>person</span>
-            </div>
-          </Link>
+          {encodedToken ? (
+            <Link to='/profile' className='nav-link'>
+              <div className='icon-badge'>
+                <span className='material-icons-outlined icon'>person</span>
+              </div>
+            </Link>
+          ) : (
+            <Link to='/login' className='nav-link'>
+              <div className='icon-badge'>
+                <span className='material-icons-outlined icon'>login</span>
+              </div>
+            </Link>
+          )}
         </li>
       </ul>
     </nav>

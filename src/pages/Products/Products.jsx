@@ -5,15 +5,21 @@ import {
   SmallScreenFilter,
   LargeScreenFilter,
 } from '../../components/index';
+import { useProducts } from '../../contexts/index';
 import { useAxios } from '../../hooks';
 import './Products.css';
+import { getSortedData, getFilteredData } from '../../utils/index';
 
 export const Products = () => {
   const {
-    data: { products },
+    data: { products = [] },
     isLoaderActive,
     error,
   } = useAxios('/api/products');
+
+  const { state } = useProducts();
+
+  const filteredProducts = getFilteredData(getSortedData)(products, state);
 
   return (
     <>
@@ -25,7 +31,7 @@ export const Products = () => {
           <Loader />
         ) : (
           <div className='grid-container auto main-content'>
-            {products.map((itemInfo) => (
+            {filteredProducts.map((itemInfo) => (
               <ProductCard key={itemInfo.id} itemInfo={itemInfo} />
             ))}
           </div>

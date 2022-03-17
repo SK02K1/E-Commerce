@@ -1,0 +1,3 @@
+export const FILTER_ACTIONS = {
+  SORT_BY_PRICE: 'SORT_BY_PRICE',
+};

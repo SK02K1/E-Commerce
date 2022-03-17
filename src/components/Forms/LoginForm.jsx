@@ -5,9 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts';
 
 const formInitialState = {
-  email: '',
-  password: '',
-  rememberMe: false,
+  email: 'adarshbalika@gmail.com',
+  password: 'adarshbalika',
+  rememberMe: true,
 };
 
 export const LoginForm = () => {
@@ -28,8 +28,7 @@ export const LoginForm = () => {
       [e.target.name]: e.target.checked,
     }));
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleLogin = async () => {
     try {
       const {
         data: { encodedToken },
@@ -49,7 +48,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='form'>
+    <form className='form'>
       <h1 className='text-xl text-center m-xs-tb'>Login</h1>
       <label className='m-sm-t' htmlFor='email'>
         Email address
@@ -90,7 +89,11 @@ export const LoginForm = () => {
       <button type='button' className='btn btn-primary m-sm-t' disabled={true}>
         Login
       </button>
-      <button type='submit' className='btn btn-primary m-sm-tb'>
+      <button
+        onClick={handleLogin}
+        type='button'
+        className='btn btn-primary m-sm-tb'
+      >
         Login as guest
       </button>
       <Link className='form-link' to='/signup'>

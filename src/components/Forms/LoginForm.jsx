@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { testCredential } from '../../utils';
 import { ClipLoader } from 'react-spinners';
+import { useSnackbar } from 'react-simple-snackbar';
 import { useAuth } from '../../contexts';
 
 const formInitialState = {
@@ -15,6 +16,7 @@ const formInitialState = {
 export const LoginForm = () => {
   const [formData, setFormData] = useState(formInitialState);
   const [isLoggingIn, setIsLogginIn] = useState(false);
+  const [openSnackbar] = useSnackbar();
   const { updateEncodedToken } = useAuth();
   const { email, password, rememberMe } = formData;
   const navigate = useNavigate();
@@ -43,13 +45,14 @@ export const LoginForm = () => {
         password,
       });
       if (status === 200) {
-        setIsLogginIn(false);
         updateEncodedToken(encodedToken);
         setFormData(formInitialState);
         navigate('/');
       }
     } catch (error) {
-      console.error(error);
+      openSnackbar('User not found');
+    } finally {
+      setIsLogginIn(false);
     }
   };
 

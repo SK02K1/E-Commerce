@@ -1,9 +1,12 @@
 import { LoginForm } from '../../components';
+import SnackbarProvider from 'react-simple-snackbar';
 
 export const Login = () => {
   return (
     <>
-      <LoginForm />
+      <SnackbarProvider>
+        <LoginForm />
+      </SnackbarProvider>
     </>
   );
 };

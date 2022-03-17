@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useProducts } from '../../../contexts/index';
+import { FILTER_ACTIONS } from '../../../utils/index';
 import '../Filter.css';
 import {
   PriceFilter,
@@ -9,6 +11,7 @@ import {
 
 export const SmallScreenFilter = () => {
   const [showFilterTray, setShowFilterTray] = useState(false);
+  const { dispatch } = useProducts();
   return (
     <div className='filter-mobile'>
       <div
@@ -33,7 +36,12 @@ export const SmallScreenFilter = () => {
 
       <div className={`filter-body ${showFilterTray && 'reveal-filter-tray'}`}>
         <div className='filter-controls m-xs-b'>
-          <button className='btn btn-secondary'>clear</button>
+          <button
+            onClick={() => dispatch({ type: FILTER_ACTIONS.CLEAR_FILTERS })}
+            className='btn btn-secondary'
+          >
+            clear
+          </button>
         </div>
         <PriceFilter />
         <CategoryFilter />

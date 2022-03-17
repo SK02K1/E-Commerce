@@ -10,7 +10,6 @@ export const PriceFilter = () => {
       payload: { price: Number(e.target.value) },
     });
 
-  console.log(state.price);
   return (
     <div className='filter-section'>
       <h2 className='text-base'>Price</h2>

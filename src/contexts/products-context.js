@@ -3,7 +3,7 @@ import { productsReducer } from '../reducers/index';
 
 const ProductsContext = createContext(null);
 
-const initialState = {
+export const initialState = {
   sortByPrice: null,
   rating: null,
   categories: [],

@@ -1,4 +1,5 @@
 import { FILTER_ACTIONS } from '../utils/index';
+import { initialState } from '../contexts/products-context';
 
 export const productsReducer = (state, { type, payload }) => {
   switch (type) {
@@ -20,6 +21,9 @@ export const productsReducer = (state, { type, payload }) => {
 
     case FILTER_ACTIONS.UPDATE_PRICE_RANGE:
       return { ...state, price: payload.price };
+
+    case FILTER_ACTIONS.CLEAR_FILTERS:
+      return { ...initialState };
 
     default:
       return { ...state };

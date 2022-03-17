@@ -44,6 +44,7 @@ export const LoginForm = () => {
         email,
         password,
       });
+      setIsLogginIn(false);
       if (status === 200) {
         updateEncodedToken(encodedToken);
         setFormData(formInitialState);
@@ -51,8 +52,6 @@ export const LoginForm = () => {
       }
     } catch (error) {
       openSnackbar('User not found');
-    } finally {
-      setIsLogginIn(false);
     }
   };
 

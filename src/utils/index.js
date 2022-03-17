@@ -8,4 +8,3 @@ export { getFilteredData } from './getFilteredData';
 export { filterByRating } from './filterByRating';
 export { filterByCategory } from './filterByCategory';
 export { filterByPrice } from './filterByPrice';
-export { testCredential } from './testCredential';

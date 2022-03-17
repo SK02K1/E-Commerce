@@ -2,8 +2,6 @@ import './Forms.css';
 import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { testCredential } from '../../utils';
-import { ClipLoader } from 'react-spinners';
 import { useAuth } from '../../contexts';
 
 const formInitialState = {
@@ -14,9 +12,8 @@ const formInitialState = {
 
 export const LoginForm = () => {
   const [formData, setFormData] = useState(formInitialState);
-  const [isLoggingIn, setIsLogginIn] = useState(false);
-  const { updateEncodedToken } = useAuth();
   const { email, password, rememberMe } = formData;
+  const { updateEncodedToken } = useAuth();
   const navigate = useNavigate();
 
   const handleInput = (e) =>
@@ -33,16 +30,14 @@ export const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLogginIn(true);
     try {
       const {
         data: { encodedToken },
         status,
       } = await axios.post('/api/auth/login', {
-        email,
-        password,
+        email: 'adarshbalika@gmail.com',
+        password: 'adarshbalika',
       });
-      setIsLogginIn(false);
       if (status === 200) {
         updateEncodedToken(encodedToken);
         setFormData(formInitialState);
@@ -52,9 +47,6 @@ export const LoginForm = () => {
       console.error(error);
     }
   };
-
-  const handleTestCredential = () =>
-    setFormData({ ...testCredential, rememberMe: true });
 
   return (
     <form onSubmit={handleSubmit} className='form'>
@@ -95,19 +87,11 @@ export const LoginForm = () => {
         />
         <span className='text-sm m-xs-l'>Remember me</span>
       </label>
-      <button type='submit' className='btn btn-primary m-sm-t'>
-        {isLoggingIn ? (
-          <ClipLoader color='#fff' size={15} speedMultiplier={2} />
-        ) : (
-          'Login'
-        )}
+      <button type='button' className='btn btn-primary m-sm-t' disabled={true}>
+        Login
       </button>
-      <button
-        onClick={handleTestCredential}
-        type='button'
-        className='btn btn-primary m-sm-tb'
-      >
-        Use Test Credentials
+      <button type='submit' className='btn btn-primary m-sm-tb'>
+        Login as guest
       </button>
       <Link className='form-link' to='/signup'>
         <span>Create New Account</span>

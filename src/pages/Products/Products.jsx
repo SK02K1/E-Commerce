@@ -13,6 +13,7 @@ import {
   getFilteredData,
   filterByRating,
   filterByCategory,
+  filterByPrice,
 } from '../../utils/index';
 
 export const Products = () => {
@@ -27,7 +28,8 @@ export const Products = () => {
   const filteredProducts = getFilteredData(
     getSortedData,
     filterByRating,
-    filterByCategory
+    filterByCategory,
+    filterByPrice
   )(products, state);
 
   return (

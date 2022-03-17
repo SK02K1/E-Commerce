@@ -7,6 +7,7 @@ const initialState = {
   sortByPrice: null,
   rating: null,
   categories: [],
+  price: 6000,
 };
 
 export const ProductsProvider = ({ children }) => {

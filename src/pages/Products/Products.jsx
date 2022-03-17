@@ -8,7 +8,11 @@ import {
 import { useProducts } from '../../contexts/index';
 import { useAxios } from '../../hooks';
 import './Products.css';
-import { getSortedData, getFilteredData } from '../../utils/index';
+import {
+  getSortedData,
+  getFilteredData,
+  filterByRating,
+} from '../../utils/index';
 
 export const Products = () => {
   const {
@@ -19,7 +23,10 @@ export const Products = () => {
 
   const { state } = useProducts();
 
-  const filteredProducts = getFilteredData(getSortedData)(products, state);
+  const filteredProducts = getFilteredData(getSortedData, filterByRating)(
+    products,
+    state
+  );
 
   return (
     <>

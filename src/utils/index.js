@@ -5,3 +5,4 @@ export { sortBy } from './sortBy';
 export { FILTER_ACTIONS } from './filterActions';
 export { getSortedData } from './getSortedData';
 export { getFilteredData } from './getFilteredData';
+export { filterByRating } from './filterByRating';

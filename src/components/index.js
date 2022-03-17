@@ -7,3 +7,4 @@ export { Loader } from './Loader/Loader';
 export { ProductCard } from './ProductCard/ProductCard';
 export { SmallScreenFilter } from './Filters/SmallScreenFilter/SmallScreenFilter';
 export { LargeScreenFilter } from './Filters/LargeScreenFilter/LargeScreenFilter';
+export { LoginForm } from './Forms/LoginForm';

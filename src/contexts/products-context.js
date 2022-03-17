@@ -6,6 +6,7 @@ const ProductsContext = createContext(null);
 const initialState = {
   sortByPrice: null,
   rating: null,
+  categories: [],
 };
 
 export const ProductsProvider = ({ children }) => {

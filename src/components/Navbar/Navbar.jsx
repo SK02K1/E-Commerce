@@ -1,41 +1,39 @@
-import NavbarStyles from './Navbar.module.css';
+import { Link } from 'react-router-dom';
+import './Navbar.css';
 
 export const Navbar = () => {
   return (
-    <nav className={`navbar ${NavbarStyles.navbar}`}>
-      <div className={NavbarStyles.logo}>
-        <a href='/'>FS.</a>
+    <nav className='navbar'>
+      <div className='logo'>
+        <Link to='/'>FS.</Link>
       </div>
-
       <ul className='links'>
         <li>
-          <a className='nav-link' href='/'>
+          <Link to='/cart' className='nav-link'>
             <div className='icon-badge'>
-              <span className={`material-icons-outlined ${NavbarStyles.icon}`}>
+              <span className='material-icons-outlined icon'>
                 shopping_cart
               </span>
               <div>0</div>
             </div>
-          </a>
+          </Link>
         </li>
         <li>
-          <a className='nav-link' href='/'>
+          <Link to='/wishlist' className='nav-link'>
             <div className='icon-badge'>
-              <span className={`material-icons-outlined ${NavbarStyles.icon}`}>
+              <span className='material-icons-outlined icon'>
                 favorite_border
               </span>
               <div>0</div>
             </div>
-          </a>
+          </Link>
         </li>
         <li>
-          <a className='nav-link' href='/'>
+          <Link to='/profile' className='nav-link'>
             <div className='icon-badge'>
-              <span className={`material-icons-outlined ${NavbarStyles.icon}`}>
-                person
-              </span>
+              <span className='material-icons-outlined icon'>person</span>
             </div>
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

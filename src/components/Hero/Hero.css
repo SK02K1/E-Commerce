@@ -1,4 +1,4 @@
-.heroSection {
+.hero-section {
   max-height: 70vh;
   margin: 2rem 0;
   border-radius: var(--br-sm);
@@ -21,32 +21,32 @@
   color: var(--white);
 }
 
-.heroTitle,
-.heroDescription {
+.hero-title,
+.hero-description {
   margin: 0.5rem 0rem;
 }
 
-.heroTitle {
+.hero-title {
   line-height: 1.2rem;
 }
 
-.heroDescription {
+.hero-description {
   letter-spacing: 1.05px;
   font-size: 1.2rem;
   font-weight: 400;
 }
 
 @media screen and (min-width: 768px) {
-  .heroTitle,
-  .heroDescription {
+  .hero-title,
+  .hero-description {
     margin: 1rem 0rem;
   }
 
-  .heroTitle {
+  .hero-title {
     font-size: 2.5rem;
   }
 
-  .heroDescription {
+  .hero-description {
     font-size: 1.5rem;
   }
 }

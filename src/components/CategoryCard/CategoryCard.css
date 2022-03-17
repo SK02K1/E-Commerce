@@ -1,4 +1,4 @@
-.categoryCard {
+.category-card {
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -8,13 +8,13 @@
   transition: transform 300ms ease;
 }
 
-.categoryCard img {
+.category-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.categoryCard:hover {
+.category-card:hover {
   transform: scale(1.04);
 }
 

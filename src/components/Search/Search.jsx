@@ -1,12 +1,10 @@
-import SearchStyles from './Search.module.css';
+import './Search.css';
 
 export const Search = () => {
   return (
-    <div className={SearchStyles.searchBar}>
+    <div className='search-bar'>
       <label htmlFor='search'>
-        <span className={`material-icons-round ${SearchStyles.searchBarIcon}`}>
-          search
-        </span>
+        <span className='material-icons-round search-bar-icon'>search</span>
       </label>
       <input
         id='search'

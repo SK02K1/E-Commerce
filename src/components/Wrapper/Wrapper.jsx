@@ -1,5 +1,5 @@
-import WrapperStyles from './Wrapper.module.css';
+import './Wrapper.css';
 
 export const Wrapper = ({ children }) => {
-  return <div className={WrapperStyles.wrapper}>{children}</div>;
+  return <div className='wrapper'>{children}</div>;
 };

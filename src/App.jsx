@@ -8,9 +8,12 @@ function App() {
       <Navbar />
       <Wrapper>
         <Routes>
+          {/* Public routes */}
           <Route path='/' element={<Home />} />
           <Route path='/products' element={<Products />} />
           <Route path='/login' element={<Login />} />
+
+          {/* Private routes */}
           <Route element={<PrivateRoute />}>
             <Route path='/cart' element={<Cart />} />
           </Route>

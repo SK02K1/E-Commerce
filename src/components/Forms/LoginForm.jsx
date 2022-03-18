@@ -40,7 +40,7 @@ export const LoginForm = () => {
       if (status === 200) {
         updateEncodedToken(encodedToken);
         setFormData(formInitialState);
-        navigate('/');
+        navigate(-1);
       }
     } catch (error) {
       console.error(error);

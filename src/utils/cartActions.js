@@ -1,0 +1,3 @@
+export const CART_ACTIONS = {
+  INITIALIZE_CART: 'INITIALIZE_CART',
+};

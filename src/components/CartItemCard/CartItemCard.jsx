@@ -30,6 +30,34 @@ export const CartItemCard = ({ product }) => {
       console.log(`Error in removing item from cart: ${error.message}`);
     }
   };
+  const handleQuantityChange = async (itemID, actionType) => {
+    try {
+      const {
+        data: { cart },
+        status,
+      } = await axios.post(
+        `/api/user/cart/${itemID}`,
+        {
+          action: {
+            type: actionType,
+          },
+        },
+        {
+          headers: {
+            authorization: encodedToken,
+          },
+        }
+      );
+      if (status === 200) {
+        dispatch({
+          type: CART_ACTIONS.ITEM_QUANTITY_CHANGE,
+          payload: { updatedQuanityCart: cart },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className='card'>
       <div className='card-header m-xs-tb'>
@@ -43,11 +71,18 @@ export const CartItemCard = ({ product }) => {
       </div>
       <div className='card-footer m-xs-tb'>
         <div className='product-qty-controls'>
-          <button className='btn btn-primary' disabled={true}>
+          <button
+            onClick={() => handleQuantityChange(_id, 'decrement')}
+            className='btn btn-primary'
+            disabled={qty === 1}
+          >
             <span className='material-icons-outlined'> remove </span>
           </button>
           <div className='qty'>{qty}</div>
-          <button className='btn btn-primary'>
+          <button
+            onClick={() => handleQuantityChange(_id, 'increment')}
+            className='btn btn-primary'
+          >
             <span className='material-icons-outlined'> add </span>
           </button>
         </div>

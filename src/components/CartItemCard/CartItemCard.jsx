@@ -1,6 +1,5 @@
-import axios from 'axios';
 import { useState } from 'react';
-import { CART_ACTIONS, sliceProductName } from '../../utils';
+import { sliceProductName } from '../../utils';
 import { useAuth, useCart } from '../../contexts';
 import './CartItemCard.css';
 import { ClipLoader } from 'react-spinners';

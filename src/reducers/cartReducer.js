@@ -6,7 +6,7 @@ export const cartReducer = (state, { type, payload }) => {
     case CART_ACTIONS.ADD_TO_CART:
       return {
         ...state,
-        cartItems: state.cartItems.concat(payload.updatedCart),
+        cartItems: payload.updatedCart,
       };
     default:
       return { ...state };

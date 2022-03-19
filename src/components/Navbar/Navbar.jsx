@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../contexts';
+import { useAuth, useCart } from '../../contexts';
 import './Navbar.css';
 
 export const Navbar = () => {
   const { encodedToken } = useAuth();
+  const {
+    state: { cartItems },
+  } = useCart();
   return (
     <nav className='navbar'>
       <div className='logo'>
@@ -16,7 +19,7 @@ export const Navbar = () => {
               <span className='material-icons-outlined icon'>
                 shopping_cart
               </span>
-              <div>0</div>
+              <div>{cartItems.length}</div>
             </div>
           </Link>
         </li>

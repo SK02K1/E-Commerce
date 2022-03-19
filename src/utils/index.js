@@ -10,3 +10,4 @@ export { filterByCategory } from './filterByCategory';
 export { filterByPrice } from './filterByPrice';
 export { CART_ACTIONS } from './cartActions';
 export { isAlreadyInCart } from './isAlreadyInCart.js';
+export { getCartDetails } from './getCartDetails';

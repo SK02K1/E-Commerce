@@ -8,6 +8,8 @@ export const cartReducer = (state, { type, payload }) => {
         ...state,
         cartItems: payload.updatedCart,
       };
+    case CART_ACTIONS.REMOVE_FROM_CART:
+      return { ...state, cartItems: payload.updatedCart };
     default:
       return { ...state };
   }

@@ -33,7 +33,7 @@ export const ProductCard = ({ itemInfo }) => {
       <div className='card-footer m-sm-tb'>
         {isAlreadyInCart(cartItems, itemInfo) ? (
           <Link className='btn btn-primary card-btn' to='/cart'>
-            go to cart
+            Go to cart
           </Link>
         ) : (
           <button
@@ -52,7 +52,7 @@ export const ProductCard = ({ itemInfo }) => {
             {isAdding ? (
               <ClipLoader size={15} color='#fff' speedMultiplier={2} />
             ) : (
-              'add to cart'
+              'Add to cart'
             )}
           </button>
         )}

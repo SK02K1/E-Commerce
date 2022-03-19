@@ -1,1 +1,2 @@
-export { handleAddToCart } from './cartServices.js';
+export { handleAddToCart } from './cartServices';
+export { handleRemoveFromCart } from './cartServices';

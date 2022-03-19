@@ -40,3 +40,29 @@ export const handleAddToCart = async ({
     navigate('/login');
   }
 };
+
+export const handleRemoveFromCart = async ({
+  itemID,
+  setIsRemoving,
+  encodedToken,
+  dispatch,
+}) => {
+  setIsRemoving(true);
+  try {
+    const {
+      data: { cart },
+      status,
+    } = await axios.delete(`/api/user/cart/${itemID}`, {
+      headers: { authorization: encodedToken },
+    });
+    setIsRemoving(false);
+    if (status === 200) {
+      dispatch({
+        type: CART_ACTIONS.REMOVE_FROM_CART,
+        payload: { updatedCart: cart },
+      });
+    }
+  } catch (error) {
+    console.log(`Error in removing item from cart: ${error.message}`);
+  }
+};

@@ -4,7 +4,7 @@ import { CART_ACTIONS, sliceProductName } from '../../utils';
 import { useAuth, useCart } from '../../contexts';
 import './CartItemCard.css';
 import { ClipLoader } from 'react-spinners';
-import { handleRemoveFromCart } from '../../services';
+import { handleRemoveFromCart, handleQuantityChange } from '../../services';
 
 export const CartItemCard = ({ product }) => {
   const [isRemoving, setIsRemoving] = useState(false);
@@ -12,34 +12,6 @@ export const CartItemCard = ({ product }) => {
   const { dispatch } = useCart();
   const { _id, name, price, qty, img } = product;
 
-  const handleQuantityChange = async (itemID, actionType) => {
-    try {
-      const {
-        data: { cart },
-        status,
-      } = await axios.post(
-        `/api/user/cart/${itemID}`,
-        {
-          action: {
-            type: actionType,
-          },
-        },
-        {
-          headers: {
-            authorization: encodedToken,
-          },
-        }
-      );
-      if (status === 200) {
-        dispatch({
-          type: CART_ACTIONS.ITEM_QUANTITY_CHANGE,
-          payload: { updatedQuanityCart: cart },
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <div className='card'>
       <div className='card-header m-xs-tb'>
@@ -54,7 +26,14 @@ export const CartItemCard = ({ product }) => {
       <div className='card-footer m-xs-tb'>
         <div className='product-qty-controls'>
           <button
-            onClick={() => handleQuantityChange(_id, 'decrement')}
+            onClick={() =>
+              handleQuantityChange({
+                itemID: _id,
+                actionType: 'decrement',
+                encodedToken,
+                dispatch,
+              })
+            }
             className='btn btn-primary'
             disabled={qty === 1}
           >
@@ -62,7 +41,14 @@ export const CartItemCard = ({ product }) => {
           </button>
           <div className='qty'>{qty}</div>
           <button
-            onClick={() => handleQuantityChange(_id, 'increment')}
+            onClick={() =>
+              handleQuantityChange({
+                itemID: _id,
+                actionType: 'increment',
+                encodedToken,
+                dispatch,
+              })
+            }
             className='btn btn-primary'
           >
             <span className='material-icons-outlined'> add </span>

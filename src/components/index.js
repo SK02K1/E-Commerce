@@ -9,3 +9,4 @@ export { SmallScreenFilter } from './Filters/SmallScreenFilter/SmallScreenFilter
 export { LargeScreenFilter } from './Filters/LargeScreenFilter/LargeScreenFilter';
 export { LoginForm } from './Forms/LoginForm';
 export { PrivateRoute } from './PrivateRoute/PrivateRoute';
+export { CartItemCard } from './CartItemCard/CartItemCard';

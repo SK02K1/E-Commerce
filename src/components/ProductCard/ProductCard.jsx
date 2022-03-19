@@ -38,13 +38,13 @@ export const ProductCard = ({ itemInfo }) => {
         ) : (
           <button
             onClick={(e) =>
-              handleAddToCart(
+              handleAddToCart({
                 itemInfo,
                 encodedToken,
                 dispatch,
                 setIsAdding,
-                navigate
-              )
+                navigate,
+              })
             }
             className='btn btn-secondary card-btn'
             disabled={isAdding}

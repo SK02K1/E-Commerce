@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { CART_ACTIONS } from '../utils';
 
-export const handleAddToCart = async (
-  product,
+export const handleAddToCart = async ({
+  itemInfo: product,
   encodedToken,
   dispatch,
   setIsAdding,
-  navigate
-) => {
+  navigate,
+}) => {
   if (encodedToken) {
     setIsAdding(true);
     try {
@@ -25,7 +25,6 @@ export const handleAddToCart = async (
           },
         }
       );
-
       if (status === 201) {
         dispatch({
           type: CART_ACTIONS.ADD_TO_CART,

@@ -1,4 +1,4 @@
-import { sliceProductName, CART_ACTIONS } from '../../utils';
+import { sliceProductName, CART_ACTIONS, isAlreadyInCart } from '../../utils';
 import { useAuth, useCart } from '../../contexts';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -66,7 +66,7 @@ export const ProductCard = ({ itemInfo }) => {
         <h4 className='text-sm'>{rating}/5</h4>
       </div>
       <div className='card-footer m-sm-tb'>
-        {cartItems.find(({ id }) => id === itemInfo.id) ? (
+        {isAlreadyInCart(cartItems, itemInfo) ? (
           <Link className='btn btn-primary card-btn' to='/cart'>
             go to cart
           </Link>

@@ -74,6 +74,7 @@ export const ProductCard = ({ itemInfo }) => {
           <button
             onClick={(e) => handleAddToCart(itemInfo, e)}
             className='btn btn-secondary card-btn'
+            disabled={isAdding}
           >
             {isAdding ? (
               <ClipLoader size={15} color='#fff' speedMultiplier={2} />

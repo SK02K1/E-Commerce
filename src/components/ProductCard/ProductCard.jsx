@@ -1,6 +1,20 @@
-import { sliceProductName } from '../../utils/index';
+import { sliceProductName, isAlreadyInCart } from '../../utils';
+import { useAuth, useCart } from '../../contexts';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { ClipLoader } from 'react-spinners';
+import { handleAddToCart } from '../../services';
 
-export const ProductCard = ({ itemInfo: { name, price, img, rating } }) => {
+export const ProductCard = ({ itemInfo }) => {
+  const { name, price, img, rating } = itemInfo;
+  const [isAdding, setIsAdding] = useState();
+  const { encodedToken } = useAuth();
+  const {
+    state: { cartItems },
+    dispatch,
+  } = useCart();
+  const navigate = useNavigate();
+
   return (
     <div className='card'>
       <span className='material-icons-outlined card-icon-like'>
@@ -17,7 +31,31 @@ export const ProductCard = ({ itemInfo: { name, price, img, rating } }) => {
         <h4 className='text-sm'>{rating}/5</h4>
       </div>
       <div className='card-footer m-sm-tb'>
-        <button className='btn btn-primary card-btn'>Add to cart</button>
+        {isAlreadyInCart(cartItems, itemInfo) ? (
+          <Link className='btn btn-primary card-btn' to='/cart'>
+            Go to cart
+          </Link>
+        ) : (
+          <button
+            onClick={(e) =>
+              handleAddToCart({
+                itemInfo,
+                encodedToken,
+                dispatch,
+                setIsAdding,
+                navigate,
+              })
+            }
+            className='btn btn-secondary card-btn'
+            disabled={isAdding}
+          >
+            {isAdding ? (
+              <ClipLoader size={15} color='#fff' speedMultiplier={2} />
+            ) : (
+              'Add to cart'
+            )}
+          </button>
+        )}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import './Forms.css';
 import axios from 'axios';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts';
 
 const formInitialState = {
@@ -15,6 +15,8 @@ export const LoginForm = () => {
   const { email, password, rememberMe } = formData;
   const { updateEncodedToken } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || -1;
 
   const handleInput = (e) =>
     setFormData((prevFormData) => ({
@@ -40,7 +42,7 @@ export const LoginForm = () => {
       if (status === 200) {
         updateEncodedToken(encodedToken);
         setFormData(formInitialState);
-        navigate('/');
+        navigate(from, { replace: true });
       }
     } catch (error) {
       console.error(error);

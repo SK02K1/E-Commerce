@@ -1,0 +1,29 @@
+.main-content {
+  padding: 1rem 0;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2rem;
+  padding-bottom: 4rem;
+}
+
+.cart-items {
+  flex-grow: 1;
+}
+
+.cart-details {
+  flex-basis: 20rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .content-wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .cart-items {
+    justify-items: left;
+  }
+}

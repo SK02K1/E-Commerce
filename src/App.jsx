@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import { Navbar, Wrapper } from './components';
-import { Home, Login, Products } from './pages';
+import { Navbar, PrivateRoute, Wrapper } from './components';
+import { Cart, Home, Login, Products } from './pages';
 
 function App() {
   return (
@@ -8,9 +8,15 @@ function App() {
       <Navbar />
       <Wrapper>
         <Routes>
+          {/* Public routes */}
           <Route path='/' element={<Home />} />
           <Route path='/products' element={<Products />} />
           <Route path='/login' element={<Login />} />
+
+          {/* Private routes */}
+          <Route element={<PrivateRoute />}>
+            <Route path='/cart' element={<Cart />} />
+          </Route>
         </Routes>
       </Wrapper>
     </div>

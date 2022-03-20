@@ -1,3 +1,7 @@
+.card-icon-like:hover {
+  color: var(--clr-accent-300);
+}
+
 .active {
   color: var(--clr-accent-500);
 }

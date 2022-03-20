@@ -2,7 +2,7 @@ import { useWishlist } from '../../contexts';
 
 export const Wishlist = () => {
   const {
-    state: { wishlist },
+    wishlistState: { wishlist },
   } = useWishlist();
 
   return (

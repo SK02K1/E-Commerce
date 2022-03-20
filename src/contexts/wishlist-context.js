@@ -6,12 +6,15 @@ import { useAuth } from './auth-context';
 
 const WishlistContext = createContext(null);
 
-export const initialState = {
+export const initialWishlistState = {
   wishlist: [],
 };
 
 export const WishlistProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(wishlistReducer, initialState);
+  const [wishlistState, dispatchWishlist] = useReducer(
+    wishlistReducer,
+    initialWishlistState
+  );
   const { encodedToken } = useAuth();
 
   useEffect(() => {
@@ -25,7 +28,7 @@ export const WishlistProvider = ({ children }) => {
             headers: { authorization: encodedToken },
           });
           if (status === 200) {
-            dispatch({
+            dispatchWishlist({
               type: WISHLIST_ACTIONS.INITIALIZE_WISHLIST,
               payload: { wishlist },
             });
@@ -38,7 +41,7 @@ export const WishlistProvider = ({ children }) => {
   }, [encodedToken]);
 
   return (
-    <WishlistContext.Provider value={{ state, dispatch }}>
+    <WishlistContext.Provider value={{ wishlistState, dispatchWishlist }}>
       {children}
     </WishlistContext.Provider>
   );

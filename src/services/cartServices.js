@@ -4,7 +4,7 @@ import { CART_ACTIONS } from '../utils';
 export const handleAddToCart = async ({
   itemInfo: product,
   encodedToken,
-  dispatch,
+  dispatchCart,
   setIsAdding,
   navigate,
 }) => {
@@ -26,7 +26,7 @@ export const handleAddToCart = async ({
         }
       );
       if (status === 201) {
-        dispatch({
+        dispatchCart({
           type: CART_ACTIONS.ADD_TO_CART,
           payload: { updatedCart: cart },
         });
@@ -45,7 +45,7 @@ export const handleRemoveFromCart = async ({
   itemID,
   setIsRemoving,
   encodedToken,
-  dispatch,
+  dispatchCart,
 }) => {
   setIsRemoving(true);
   try {
@@ -57,7 +57,7 @@ export const handleRemoveFromCart = async ({
     });
     setIsRemoving(false);
     if (status === 200) {
-      dispatch({
+      dispatchCart({
         type: CART_ACTIONS.REMOVE_FROM_CART,
         payload: { updatedCart: cart },
       });
@@ -71,7 +71,7 @@ export const handleQuantityChange = async ({
   itemID,
   actionType,
   encodedToken,
-  dispatch,
+  dispatchCart,
 }) => {
   try {
     const {
@@ -91,7 +91,7 @@ export const handleQuantityChange = async ({
       }
     );
     if (status === 200) {
-      dispatch({
+      dispatchCart({
         type: CART_ACTIONS.ITEM_QUANTITY_CHANGE,
         payload: { updatedQuanityCart: cart },
       });

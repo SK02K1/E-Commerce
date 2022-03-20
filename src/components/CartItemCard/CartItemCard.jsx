@@ -8,7 +8,7 @@ import { handleRemoveFromCart, handleQuantityChange } from '../../services';
 export const CartItemCard = ({ product }) => {
   const [isRemoving, setIsRemoving] = useState(false);
   const { encodedToken } = useAuth();
-  const { dispatch } = useCart();
+  const { dispatchCart } = useCart();
   const { _id, name, price, qty, img } = product;
 
   return (
@@ -30,7 +30,7 @@ export const CartItemCard = ({ product }) => {
                 itemID: _id,
                 actionType: 'decrement',
                 encodedToken,
-                dispatch,
+                dispatchCart,
               })
             }
             className='btn btn-primary'
@@ -45,7 +45,7 @@ export const CartItemCard = ({ product }) => {
                 itemID: _id,
                 actionType: 'increment',
                 encodedToken,
-                dispatch,
+                dispatchCart,
               })
             }
             className='btn btn-primary'
@@ -62,7 +62,7 @@ export const CartItemCard = ({ product }) => {
               itemID: _id,
               setIsRemoving,
               encodedToken,
-              dispatch,
+              dispatchCart,
             })
           }
           className='btn btn-secondary outlined card-btn m-sm-t'

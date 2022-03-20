@@ -5,7 +5,7 @@ import './Navbar.css';
 export const Navbar = () => {
   const { encodedToken } = useAuth();
   const {
-    state: { cartItems },
+    cartState: { cartItems },
   } = useCart();
   return (
     <nav className='navbar'>

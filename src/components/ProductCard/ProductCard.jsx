@@ -10,8 +10,8 @@ export const ProductCard = ({ itemInfo }) => {
   const [isAdding, setIsAdding] = useState();
   const { encodedToken } = useAuth();
   const {
-    state: { cartItems },
-    dispatch,
+    cartState: { cartItems },
+    dispatchCart,
   } = useCart();
   const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ export const ProductCard = ({ itemInfo }) => {
               handleAddToCart({
                 itemInfo,
                 encodedToken,
-                dispatch,
+                dispatchCart,
                 setIsAdding,
                 navigate,
               })

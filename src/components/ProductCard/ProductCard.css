@@ -1,0 +1,7 @@
+.active {
+  color: var(--clr-accent-500);
+}
+
+.inactive {
+  color: var(--gray);
+}

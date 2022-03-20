@@ -1,24 +1,48 @@
-import { sliceProductName, isAlreadyInCart } from '../../utils';
-import { useAuth, useCart } from '../../contexts';
+import {
+  sliceProductName,
+  isAlreadyInCart,
+  isAlreadyInWishlist,
+} from '../../utils';
+import './ProductCard.css';
+import { useAuth, useCart, useWishlist } from '../../contexts';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { ClipLoader } from 'react-spinners';
-import { handleAddToCart } from '../../services';
+import { handleAddToCart, handleAddToWishlist } from '../../services';
 
 export const ProductCard = ({ itemInfo }) => {
   const { name, price, img, rating } = itemInfo;
   const [isAdding, setIsAdding] = useState();
   const { encodedToken } = useAuth();
+  const navigate = useNavigate();
   const {
     cartState: { cartItems },
     dispatchCart,
   } = useCart();
-  const navigate = useNavigate();
+  const {
+    wishlistState: { wishlist },
+    dispatchWishlist,
+  } = useWishlist();
+
+  const isInWishlist = isAlreadyInWishlist(wishlist, itemInfo);
+  console.log(isInWishlist);
 
   return (
     <div className='card'>
-      <span className='material-icons-outlined card-icon-like'>
-        favorite_border
+      <span
+        onClick={() =>
+          handleAddToWishlist({
+            product: itemInfo,
+            encodedToken,
+            dispatchWishlist,
+            navigate,
+          })
+        }
+        className={`material-icons-outlined card-icon-like ${
+          isInWishlist ? 'active' : 'inactive'
+        }`}
+      >
+        favorite
       </span>
       <div className='card-header m-xs-tb'>
         <img className='card-img m-xs-tb' src={img} alt={name} />

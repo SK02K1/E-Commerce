@@ -8,10 +8,14 @@ import { useAuth, useCart, useWishlist } from '../../contexts';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { ClipLoader } from 'react-spinners';
-import { handleAddToCart, handleAddToWishlist } from '../../services';
+import {
+  handleAddToCart,
+  handleAddToWishlist,
+  handleRemoveFromWishlist,
+} from '../../services';
 
 export const ProductCard = ({ itemInfo }) => {
-  const { name, price, img, rating } = itemInfo;
+  const { _id, name, price, img, rating } = itemInfo;
   const [isAdding, setIsAdding] = useState();
   const { encodedToken } = useAuth();
   const navigate = useNavigate();
@@ -25,18 +29,23 @@ export const ProductCard = ({ itemInfo }) => {
   } = useWishlist();
 
   const isInWishlist = isAlreadyInWishlist(wishlist, itemInfo);
-  console.log(isInWishlist);
 
   return (
     <div className='card'>
       <span
         onClick={() =>
-          handleAddToWishlist({
-            product: itemInfo,
-            encodedToken,
-            dispatchWishlist,
-            navigate,
-          })
+          isInWishlist
+            ? handleRemoveFromWishlist({
+                itemID: _id,
+                encodedToken,
+                dispatchWishlist,
+              })
+            : handleAddToWishlist({
+                product: itemInfo,
+                encodedToken,
+                dispatchWishlist,
+                navigate,
+              })
         }
         className={`material-icons-outlined card-icon-like ${
           isInWishlist ? 'active' : 'inactive'

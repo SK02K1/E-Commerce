@@ -30,3 +30,26 @@ export const handleAddToWishlist = async ({
     navigate('/login');
   }
 };
+
+export const handleRemoveFromWishlist = async ({
+  itemID,
+  encodedToken,
+  dispatchWishlist,
+}) => {
+  try {
+    const {
+      data: { wishlist },
+      status,
+    } = await axios.delete(`/api/user/wishlist/${itemID}`, {
+      headers: { authorization: encodedToken },
+    });
+    if (status === 200) {
+      dispatchWishlist({
+        type: WISHLIST_ACTIONS.UPDATE_WISHLIST,
+        payload: { updatedWishlist: wishlist },
+      });
+    }
+  } catch (error) {
+    console.error(error.response);
+  }
+};

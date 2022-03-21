@@ -4,4 +4,5 @@ export { handleQuantityChange } from './cartServices';
 export {
   handleAddToWishlist,
   handleRemoveFromWishlist,
+  handleMoveToCart,
 } from './wishlistServices';

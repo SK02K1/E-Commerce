@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { WISHLIST_ACTIONS } from '../utils';
+import { handleAddToCart } from './cartServices';
 
 export const handleAddToWishlist = async ({
   product,
@@ -52,4 +53,24 @@ export const handleRemoveFromWishlist = async ({
   } catch (error) {
     console.error(error.response);
   }
+};
+
+export const handleMoveToCart = ({
+  product,
+  encodedToken,
+  dispatchWishlist,
+  dispatchCart,
+  setIsAdding,
+}) => {
+  handleAddToCart({
+    itemInfo: product,
+    encodedToken,
+    dispatchCart,
+    setIsAdding,
+  });
+  handleRemoveFromWishlist({
+    itemID: product._id,
+    encodedToken,
+    dispatchWishlist,
+  });
 };

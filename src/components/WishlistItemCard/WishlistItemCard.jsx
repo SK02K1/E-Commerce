@@ -1,14 +1,17 @@
 import { isAlreadyInCart, sliceProductName } from '../../utils';
-import { handleRemoveFromWishlist } from '../../services/';
+import { handleRemoveFromWishlist, handleMoveToCart } from '../../services/';
 import { useAuth, useCart, useWishlist } from '../../contexts';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 export const WishlistItemCard = ({ product }) => {
   const { _id, name, price, img } = product;
   const { dispatchWishlist } = useWishlist();
   const { encodedToken } = useAuth();
+  const [isAdding, setIsAdding] = useState(false);
   const {
     cartState: { cartItems },
+    dispatchCart,
   } = useCart();
   const isInCart = isAlreadyInCart(cartItems, product);
   return (
@@ -40,7 +43,20 @@ export const WishlistItemCard = ({ product }) => {
             checkout
           </Link>
         ) : (
-          <button className='btn btn-primary card-btn'>Move to cart</button>
+          <button
+            onClick={() =>
+              handleMoveToCart({
+                product,
+                encodedToken,
+                dispatchCart,
+                dispatchWishlist,
+                setIsAdding,
+              })
+            }
+            className='btn btn-primary card-btn'
+          >
+            Move to cart
+          </button>
         )}
       </div>
     </div>

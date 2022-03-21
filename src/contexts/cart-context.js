@@ -5,11 +5,13 @@ import axios from 'axios';
 import { CART_ACTIONS } from '../utils';
 
 const CartContext = createContext(null);
-const initialState = {
+
+const initialCartState = {
   cartItems: [],
 };
+
 export const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, initialState);
+  const [cartState, dispatchCart] = useReducer(cartReducer, initialCartState);
   const { encodedToken } = useAuth();
 
   useEffect(() => {
@@ -25,7 +27,10 @@ export const CartProvider = ({ children }) => {
             },
           });
           if (statusText === 'OK') {
-            dispatch({ type: CART_ACTIONS.INITIALIZE_CART, payload: { cart } });
+            dispatchCart({
+              type: CART_ACTIONS.INITIALIZE_CART,
+              payload: { cart },
+            });
           }
         } catch (error) {
           console.log(error.response);
@@ -35,7 +40,7 @@ export const CartProvider = ({ children }) => {
   }, [encodedToken]);
 
   return (
-    <CartContext.Provider value={{ state, dispatch }}>
+    <CartContext.Provider value={{ cartState, dispatchCart }}>
       {children}
     </CartContext.Provider>
   );

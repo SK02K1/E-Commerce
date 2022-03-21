@@ -11,3 +11,5 @@ export { LoginForm } from './Forms/LoginForm';
 export { PrivateRoute } from './PrivateRoute/PrivateRoute';
 export { CartItemCard } from './CartItemCard/CartItemCard';
 export { CartDetailsCard } from './CartDetailsCard/CartDetailsCard';
+export { WishlistItemCard } from './WishlistItemCard/WishlistItemCard';
+export { CardLoader } from './Loader/CardLoader';

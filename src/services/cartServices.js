@@ -1,15 +1,16 @@
 import axios from 'axios';
 import { CART_ACTIONS } from '../utils';
+import { handleAddToWishlist } from './wishlistServices';
 
 export const handleAddToCart = async ({
   itemInfo: product,
   encodedToken,
-  dispatch,
-  setIsAdding,
+  dispatchCart,
+  setShowCardLoader,
   navigate,
 }) => {
   if (encodedToken) {
-    setIsAdding(true);
+    setShowCardLoader(true);
     try {
       const {
         data: { cart },
@@ -26,7 +27,7 @@ export const handleAddToCart = async ({
         }
       );
       if (status === 201) {
-        dispatch({
+        dispatchCart({
           type: CART_ACTIONS.ADD_TO_CART,
           payload: { updatedCart: cart },
         });
@@ -34,7 +35,7 @@ export const handleAddToCart = async ({
     } catch (error) {
       console.log(`Error in adding product to cart: ${error.message}`);
     } finally {
-      setIsAdding(false);
+      setShowCardLoader(false);
     }
   } else {
     navigate('/login');
@@ -43,11 +44,11 @@ export const handleAddToCart = async ({
 
 export const handleRemoveFromCart = async ({
   itemID,
-  setIsRemoving,
+  setShowCardLoader,
   encodedToken,
-  dispatch,
+  dispatchCart,
 }) => {
-  setIsRemoving(true);
+  setShowCardLoader(true);
   try {
     const {
       data: { cart },
@@ -55,9 +56,9 @@ export const handleRemoveFromCart = async ({
     } = await axios.delete(`/api/user/cart/${itemID}`, {
       headers: { authorization: encodedToken },
     });
-    setIsRemoving(false);
+    setShowCardLoader(false);
     if (status === 200) {
-      dispatch({
+      dispatchCart({
         type: CART_ACTIONS.REMOVE_FROM_CART,
         payload: { updatedCart: cart },
       });
@@ -71,9 +72,11 @@ export const handleQuantityChange = async ({
   itemID,
   actionType,
   encodedToken,
-  dispatch,
+  dispatchCart,
+  setShowCardLoader,
 }) => {
   try {
+    setShowCardLoader(true);
     const {
       data: { cart },
       status,
@@ -90,8 +93,9 @@ export const handleQuantityChange = async ({
         },
       }
     );
+    setShowCardLoader(false);
     if (status === 200) {
-      dispatch({
+      dispatchCart({
         type: CART_ACTIONS.ITEM_QUANTITY_CHANGE,
         payload: { updatedQuanityCart: cart },
       });
@@ -99,4 +103,25 @@ export const handleQuantityChange = async ({
   } catch (error) {
     console.log(`Error in updating item quantity: ${error.message}`);
   }
+};
+
+export const handleMoveToWishlist = ({
+  product,
+  encodedToken,
+  dispatchWishlist,
+  dispatchCart,
+  setShowCardLoader,
+}) => {
+  handleAddToWishlist({
+    product,
+    encodedToken,
+    dispatchWishlist,
+    setShowCardLoader,
+  });
+  handleRemoveFromCart({
+    itemID: product._id,
+    setShowCardLoader,
+    encodedToken,
+    dispatchCart,
+  });
 };

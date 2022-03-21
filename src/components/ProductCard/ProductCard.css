@@ -1,0 +1,9 @@
+.active,
+.active:hover {
+  color: var(--clr-accent-500);
+}
+
+.inactive,
+.inactive:hover {
+  color: var(--gray);
+}

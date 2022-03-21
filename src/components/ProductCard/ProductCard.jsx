@@ -1,24 +1,60 @@
-import { sliceProductName, isAlreadyInCart } from '../../utils';
-import { useAuth, useCart } from '../../contexts';
+import {
+  sliceProductName,
+  isAlreadyInCart,
+  isAlreadyInWishlist,
+} from '../../utils';
+import './ProductCard.css';
+import { useAuth, useCart, useWishlist } from '../../contexts';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { ClipLoader } from 'react-spinners';
-import { handleAddToCart } from '../../services';
+import { CardLoader } from '../Loader/CardLoader';
+import {
+  handleAddToCart,
+  handleAddToWishlist,
+  handleRemoveFromWishlist,
+} from '../../services';
 
 export const ProductCard = ({ itemInfo }) => {
-  const { name, price, img, rating } = itemInfo;
-  const [isAdding, setIsAdding] = useState();
+  const { _id, name, price, img, rating } = itemInfo;
+  const [showCardLoader, setShowCardLoader] = useState(false);
   const { encodedToken } = useAuth();
-  const {
-    state: { cartItems },
-    dispatch,
-  } = useCart();
   const navigate = useNavigate();
+  const {
+    cartState: { cartItems },
+    dispatchCart,
+  } = useCart();
+  const {
+    wishlistState: { wishlist },
+    dispatchWishlist,
+  } = useWishlist();
+
+  const isInWishlist = isAlreadyInWishlist(wishlist, itemInfo);
 
   return (
     <div className='card'>
-      <span className='material-icons-outlined card-icon-like'>
-        favorite_border
+      <CardLoader showLoader={showCardLoader} />
+      <span
+        onClick={() =>
+          isInWishlist
+            ? handleRemoveFromWishlist({
+                itemID: _id,
+                encodedToken,
+                dispatchWishlist,
+                setShowCardLoader,
+              })
+            : handleAddToWishlist({
+                product: itemInfo,
+                encodedToken,
+                dispatchWishlist,
+                setShowCardLoader,
+                navigate,
+              })
+        }
+        className={`material-icons-outlined card-icon-like ${
+          isInWishlist ? 'active' : 'inactive'
+        }`}
+      >
+        favorite
       </span>
       <div className='card-header m-xs-tb'>
         <img className='card-img m-xs-tb' src={img} alt={name} />
@@ -41,19 +77,14 @@ export const ProductCard = ({ itemInfo }) => {
               handleAddToCart({
                 itemInfo,
                 encodedToken,
-                dispatch,
-                setIsAdding,
+                dispatchCart,
+                setShowCardLoader,
                 navigate,
               })
             }
             className='btn btn-secondary card-btn'
-            disabled={isAdding}
           >
-            {isAdding ? (
-              <ClipLoader size={15} color='#fff' speedMultiplier={2} />
-            ) : (
-              'Add to cart'
-            )}
+            Add to cart
           </button>
         )}
       </div>

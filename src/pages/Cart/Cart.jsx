@@ -3,8 +3,8 @@ import { useCart } from '../../contexts';
 import './Cart.css';
 
 export const Cart = () => {
-  const { state } = useCart();
-  const { cartItems } = state;
+  const { cartState } = useCart();
+  const { cartItems } = cartState;
   const itemsInCart = cartItems.length;
 
   return (

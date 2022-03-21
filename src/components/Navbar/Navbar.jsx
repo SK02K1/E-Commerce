@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
-import { useAuth, useCart } from '../../contexts';
+import { useAuth, useCart, useWishlist } from '../../contexts';
 import './Navbar.css';
 
 export const Navbar = () => {
   const { encodedToken } = useAuth();
   const {
-    state: { cartItems },
+    cartState: { cartItems },
   } = useCart();
+  const {
+    wishlistState: { wishlist },
+  } = useWishlist();
   return (
     <nav className='navbar'>
       <div className='logo'>
@@ -29,7 +32,7 @@ export const Navbar = () => {
               <span className='material-icons-outlined icon'>
                 favorite_border
               </span>
-              <div>0</div>
+              <div>{wishlist.length}</div>
             </div>
           </Link>
         </li>

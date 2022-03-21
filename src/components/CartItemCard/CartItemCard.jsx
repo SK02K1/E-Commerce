@@ -1,18 +1,29 @@
 import { useState } from 'react';
-import { sliceProductName } from '../../utils';
-import { useAuth, useCart } from '../../contexts';
+import { isAlreadyInWishlist, sliceProductName } from '../../utils';
+import { useAuth, useCart, useWishlist } from '../../contexts';
 import './CartItemCard.css';
-import { ClipLoader } from 'react-spinners';
-import { handleRemoveFromCart, handleQuantityChange } from '../../services';
+import { Link } from 'react-router-dom';
+import {
+  handleRemoveFromCart,
+  handleQuantityChange,
+  handleMoveToWishlist,
+} from '../../services';
+import { CardLoader } from '..//Loader/CardLoader';
 
 export const CartItemCard = ({ product }) => {
-  const [isRemoving, setIsRemoving] = useState(false);
+  const [showCardLoader, setShowCardLoader] = useState(false);
   const { encodedToken } = useAuth();
-  const { dispatch } = useCart();
+  const { dispatchCart } = useCart();
+  const {
+    wishlistState: { wishlist },
+    dispatchWishlist,
+  } = useWishlist();
   const { _id, name, price, qty, img } = product;
+  const isInWishlist = isAlreadyInWishlist(wishlist, product);
 
   return (
     <div className='card'>
+      <CardLoader showLoader={showCardLoader} />
       <div className='card-header m-xs-tb'>
         <img className='card-img m-xs-tb' src={img} alt={name} />
       </div>
@@ -22,7 +33,7 @@ export const CartItemCard = ({ product }) => {
           {name.length >= 30 ? sliceProductName(name) : name}
         </h3>
       </div>
-      <div className='card-footer m-xs-tb'>
+      <div className='card-footer m-sm-tb'>
         <div className='product-qty-controls'>
           <button
             onClick={() =>
@@ -30,7 +41,8 @@ export const CartItemCard = ({ product }) => {
                 itemID: _id,
                 actionType: 'decrement',
                 encodedToken,
-                dispatch,
+                dispatchCart,
+                setShowCardLoader,
               })
             }
             className='btn btn-primary'
@@ -45,7 +57,8 @@ export const CartItemCard = ({ product }) => {
                 itemID: _id,
                 actionType: 'increment',
                 encodedToken,
-                dispatch,
+                dispatchCart,
+                setShowCardLoader,
               })
             }
             className='btn btn-primary'
@@ -53,25 +66,38 @@ export const CartItemCard = ({ product }) => {
             <span className='material-icons-outlined'> add </span>
           </button>
         </div>
-        <button className='btn btn-secondary card-btn m-sm-t'>
-          Move to wishlist
-        </button>
+        {isInWishlist ? (
+          <Link to='/wishlist' className='btn btn-secondary card-btn m-sm-t'>
+            Go to wishlist
+          </Link>
+        ) : (
+          <button
+            onClick={() =>
+              handleMoveToWishlist({
+                product,
+                encodedToken,
+                dispatchWishlist,
+                dispatchCart,
+                setShowCardLoader,
+              })
+            }
+            className='btn btn-secondary card-btn m-sm-t'
+          >
+            Move to wishlist
+          </button>
+        )}
         <button
           onClick={() =>
             handleRemoveFromCart({
               itemID: _id,
-              setIsRemoving,
+              setShowCardLoader,
               encodedToken,
-              dispatch,
+              dispatchCart,
             })
           }
           className='btn btn-secondary outlined card-btn m-sm-t'
         >
-          {isRemoving ? (
-            <ClipLoader size={15} color='#282828' speedMultiplier={2} />
-          ) : (
-            'Remove from cart'
-          )}
+          Remove from cart
         </button>
       </div>
     </div>

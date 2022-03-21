@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { Navbar, PrivateRoute, Wrapper } from './components';
 import { Cart, Home, Login, Products } from './pages';
+import { Wishlist } from './pages/Wishlist/Wishlist';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           {/* Private routes */}
           <Route element={<PrivateRoute />}>
             <Route path='/cart' element={<Cart />} />
+            <Route path='/wishlist' element={<Wishlist />} />
           </Route>
         </Routes>
       </Wrapper>

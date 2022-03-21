@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { isAlreadyInWishlist, sliceProductName } from '../../utils';
 import { useAuth, useCart, useWishlist } from '../../contexts';
 import './CartItemCard.css';
-import { ClipLoader } from 'react-spinners';
 import { Link } from 'react-router-dom';
 import {
   handleRemoveFromCart,

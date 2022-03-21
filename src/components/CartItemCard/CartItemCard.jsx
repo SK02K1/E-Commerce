@@ -34,7 +34,7 @@ export const CartItemCard = ({ product }) => {
           {name.length >= 30 ? sliceProductName(name) : name}
         </h3>
       </div>
-      <div className='card-footer m-xs-tb'>
+      <div className='card-footer m-sm-tb'>
         <div className='product-qty-controls'>
           <button
             onClick={() =>

@@ -1,6 +1,7 @@
 import { isAlreadyInCart, sliceProductName } from '../../utils';
 import { handleRemoveFromWishlist, handleMoveToCart } from '../../services/';
 import { useAuth, useCart, useWishlist } from '../../contexts';
+import { CardLoader } from '../Loader/CardLoader';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -8,7 +9,7 @@ export const WishlistItemCard = ({ product }) => {
   const { _id, name, price, img } = product;
   const { dispatchWishlist } = useWishlist();
   const { encodedToken } = useAuth();
-  const [isAdding, setIsAdding] = useState(false);
+  const [showCardLoader, setShowCardLoader] = useState(false);
   const {
     cartState: { cartItems },
     dispatchCart,
@@ -16,12 +17,14 @@ export const WishlistItemCard = ({ product }) => {
   const isInCart = isAlreadyInCart(cartItems, product);
   return (
     <div className='card'>
+      <CardLoader showLoader={showCardLoader} />
       <span
         onClick={() =>
           handleRemoveFromWishlist({
             itemID: _id,
             dispatchWishlist,
             encodedToken,
+            setShowCardLoader,
           })
         }
         className='material-icons-outlined card-icon-like active'
@@ -50,7 +53,7 @@ export const WishlistItemCard = ({ product }) => {
                 encodedToken,
                 dispatchCart,
                 dispatchWishlist,
-                setIsAdding,
+                setShowCardLoader,
               })
             }
             className='btn btn-primary card-btn'

@@ -7,7 +7,7 @@ import './ProductCard.css';
 import { useAuth, useCart, useWishlist } from '../../contexts';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { ClipLoader } from 'react-spinners';
+import { CardLoader } from '../Loader/CardLoader';
 import {
   handleAddToCart,
   handleAddToWishlist,
@@ -16,7 +16,7 @@ import {
 
 export const ProductCard = ({ itemInfo }) => {
   const { _id, name, price, img, rating } = itemInfo;
-  const [isAdding, setIsAdding] = useState();
+  const [showCardLoader, setShowCardLoader] = useState(false);
   const { encodedToken } = useAuth();
   const navigate = useNavigate();
   const {
@@ -32,6 +32,7 @@ export const ProductCard = ({ itemInfo }) => {
 
   return (
     <div className='card'>
+      <CardLoader showLoader={showCardLoader} />
       <span
         onClick={() =>
           isInWishlist
@@ -39,11 +40,13 @@ export const ProductCard = ({ itemInfo }) => {
                 itemID: _id,
                 encodedToken,
                 dispatchWishlist,
+                setShowCardLoader,
               })
             : handleAddToWishlist({
                 product: itemInfo,
                 encodedToken,
                 dispatchWishlist,
+                setShowCardLoader,
                 navigate,
               })
         }
@@ -75,18 +78,13 @@ export const ProductCard = ({ itemInfo }) => {
                 itemInfo,
                 encodedToken,
                 dispatchCart,
-                setIsAdding,
+                setShowCardLoader,
                 navigate,
               })
             }
             className='btn btn-secondary card-btn'
-            disabled={isAdding}
           >
-            {isAdding ? (
-              <ClipLoader size={15} color='#fff' speedMultiplier={2} />
-            ) : (
-              'Add to cart'
-            )}
+            Add to cart
           </button>
         )}
       </div>

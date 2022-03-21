@@ -9,9 +9,10 @@ import {
   handleQuantityChange,
   handleMoveToWishlist,
 } from '../../services';
+import { CardLoader } from '..//Loader/CardLoader';
 
 export const CartItemCard = ({ product }) => {
-  const [isRemoving, setIsRemoving] = useState(false);
+  const [showCardLoader, setShowCardLoader] = useState(false);
   const { encodedToken } = useAuth();
   const { dispatchCart } = useCart();
   const {
@@ -23,6 +24,7 @@ export const CartItemCard = ({ product }) => {
 
   return (
     <div className='card'>
+      <CardLoader showLoader={showCardLoader} />
       <div className='card-header m-xs-tb'>
         <img className='card-img m-xs-tb' src={img} alt={name} />
       </div>
@@ -41,6 +43,7 @@ export const CartItemCard = ({ product }) => {
                 actionType: 'decrement',
                 encodedToken,
                 dispatchCart,
+                setShowCardLoader,
               })
             }
             className='btn btn-primary'
@@ -56,6 +59,7 @@ export const CartItemCard = ({ product }) => {
                 actionType: 'increment',
                 encodedToken,
                 dispatchCart,
+                setShowCardLoader,
               })
             }
             className='btn btn-primary'
@@ -75,7 +79,7 @@ export const CartItemCard = ({ product }) => {
                 encodedToken,
                 dispatchWishlist,
                 dispatchCart,
-                setIsRemoving,
+                setShowCardLoader,
               })
             }
             className='btn btn-secondary card-btn m-sm-t'
@@ -87,18 +91,14 @@ export const CartItemCard = ({ product }) => {
           onClick={() =>
             handleRemoveFromCart({
               itemID: _id,
-              setIsRemoving,
+              setShowCardLoader,
               encodedToken,
               dispatchCart,
             })
           }
           className='btn btn-secondary outlined card-btn m-sm-t'
         >
-          {isRemoving ? (
-            <ClipLoader size={15} color='#282828' speedMultiplier={2} />
-          ) : (
-            'Remove from cart'
-          )}
+          Remove from cart
         </button>
       </div>
     </div>

@@ -6,11 +6,11 @@ export const handleAddToCart = async ({
   itemInfo: product,
   encodedToken,
   dispatchCart,
-  setIsAdding,
+  setShowCardLoader,
   navigate,
 }) => {
   if (encodedToken) {
-    setIsAdding(true);
+    setShowCardLoader(true);
     try {
       const {
         data: { cart },
@@ -35,7 +35,7 @@ export const handleAddToCart = async ({
     } catch (error) {
       console.log(`Error in adding product to cart: ${error.message}`);
     } finally {
-      setIsAdding(false);
+      setShowCardLoader(false);
     }
   } else {
     navigate('/login');
@@ -44,11 +44,11 @@ export const handleAddToCart = async ({
 
 export const handleRemoveFromCart = async ({
   itemID,
-  setIsRemoving,
+  setShowCardLoader,
   encodedToken,
   dispatchCart,
 }) => {
-  setIsRemoving(true);
+  setShowCardLoader(true);
   try {
     const {
       data: { cart },
@@ -56,7 +56,7 @@ export const handleRemoveFromCart = async ({
     } = await axios.delete(`/api/user/cart/${itemID}`, {
       headers: { authorization: encodedToken },
     });
-    setIsRemoving(false);
+    setShowCardLoader(false);
     if (status === 200) {
       dispatchCart({
         type: CART_ACTIONS.REMOVE_FROM_CART,
@@ -73,8 +73,10 @@ export const handleQuantityChange = async ({
   actionType,
   encodedToken,
   dispatchCart,
+  setShowCardLoader,
 }) => {
   try {
+    setShowCardLoader(true);
     const {
       data: { cart },
       status,
@@ -91,6 +93,7 @@ export const handleQuantityChange = async ({
         },
       }
     );
+    setShowCardLoader(false);
     if (status === 200) {
       dispatchCart({
         type: CART_ACTIONS.ITEM_QUANTITY_CHANGE,
@@ -107,12 +110,17 @@ export const handleMoveToWishlist = ({
   encodedToken,
   dispatchWishlist,
   dispatchCart,
-  setIsRemoving,
+  setShowCardLoader,
 }) => {
-  handleAddToWishlist({ product, encodedToken, dispatchWishlist });
+  handleAddToWishlist({
+    product,
+    encodedToken,
+    dispatchWishlist,
+    setShowCardLoader,
+  });
   handleRemoveFromCart({
     itemID: product._id,
-    setIsRemoving,
+    setShowCardLoader,
     encodedToken,
     dispatchCart,
   });

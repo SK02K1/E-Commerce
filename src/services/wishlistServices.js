@@ -6,9 +6,11 @@ export const handleAddToWishlist = async ({
   product,
   encodedToken,
   dispatchWishlist,
+  setShowCardLoader,
   navigate,
 }) => {
   if (encodedToken) {
+    setShowCardLoader(true);
     try {
       const {
         data: { wishlist },
@@ -18,6 +20,7 @@ export const handleAddToWishlist = async ({
         { product },
         { headers: { authorization: encodedToken } }
       );
+      setShowCardLoader(false);
       if (status === 201) {
         dispatchWishlist({
           type: WISHLIST_ACTIONS.UPDATE_WISHLIST,
@@ -36,14 +39,17 @@ export const handleRemoveFromWishlist = async ({
   itemID,
   encodedToken,
   dispatchWishlist,
+  setShowCardLoader,
 }) => {
   try {
+    setShowCardLoader(true);
     const {
       data: { wishlist },
       status,
     } = await axios.delete(`/api/user/wishlist/${itemID}`, {
       headers: { authorization: encodedToken },
     });
+    setShowCardLoader(false);
     if (status === 200) {
       dispatchWishlist({
         type: WISHLIST_ACTIONS.UPDATE_WISHLIST,
@@ -60,17 +66,18 @@ export const handleMoveToCart = ({
   encodedToken,
   dispatchWishlist,
   dispatchCart,
-  setIsAdding,
+  setShowCardLoader,
 }) => {
   handleAddToCart({
     itemInfo: product,
     encodedToken,
     dispatchCart,
-    setIsAdding,
+    setShowCardLoader,
   });
   handleRemoveFromWishlist({
     itemID: product._id,
     encodedToken,
     dispatchWishlist,
+    setShowCardLoader,
   });
 };

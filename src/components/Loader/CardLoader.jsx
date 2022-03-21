@@ -11,9 +11,9 @@ export const CardLoader = ({ showLoader }) => {
   return (
     <div className={`card-loader-wrapper card-loader-active-${showLoader}`}>
       <ClipLoader
-        color='#e8eaed'
+        color='#3b82f6'
         loading={true}
-        size={20}
+        size={30}
         css={override}
         speedMultiplier={3}
       />

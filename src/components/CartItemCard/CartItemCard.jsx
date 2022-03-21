@@ -1,15 +1,25 @@
 import { useState } from 'react';
-import { sliceProductName } from '../../utils';
-import { useAuth, useCart } from '../../contexts';
+import { isAlreadyInWishlist, sliceProductName } from '../../utils';
+import { useAuth, useCart, useWishlist } from '../../contexts';
 import './CartItemCard.css';
 import { ClipLoader } from 'react-spinners';
-import { handleRemoveFromCart, handleQuantityChange } from '../../services';
+import { Link } from 'react-router-dom';
+import {
+  handleRemoveFromCart,
+  handleQuantityChange,
+  handleMoveToWishlist,
+} from '../../services';
 
 export const CartItemCard = ({ product }) => {
   const [isRemoving, setIsRemoving] = useState(false);
   const { encodedToken } = useAuth();
   const { dispatchCart } = useCart();
+  const {
+    wishlistState: { wishlist },
+    dispatchWishlist,
+  } = useWishlist();
   const { _id, name, price, qty, img } = product;
+  const isInWishlist = isAlreadyInWishlist(wishlist, product);
 
   return (
     <div className='card'>
@@ -53,9 +63,26 @@ export const CartItemCard = ({ product }) => {
             <span className='material-icons-outlined'> add </span>
           </button>
         </div>
-        <button className='btn btn-secondary card-btn m-sm-t'>
-          Move to wishlist
-        </button>
+        {isInWishlist ? (
+          <Link to='/wishlist' className='btn btn-secondary card-btn m-sm-t'>
+            Go to wishlist
+          </Link>
+        ) : (
+          <button
+            onClick={() =>
+              handleMoveToWishlist({
+                product,
+                encodedToken,
+                dispatchWishlist,
+                dispatchCart,
+                setIsRemoving,
+              })
+            }
+            className='btn btn-secondary card-btn m-sm-t'
+          >
+            Move to wishlist
+          </button>
+        )}
         <button
           onClick={() =>
             handleRemoveFromCart({

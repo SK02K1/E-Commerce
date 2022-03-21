@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { CART_ACTIONS } from '../utils';
+import { handleAddToWishlist } from './wishlistServices';
 
 export const handleAddToCart = async ({
   itemInfo: product,
@@ -99,4 +100,20 @@ export const handleQuantityChange = async ({
   } catch (error) {
     console.log(`Error in updating item quantity: ${error.message}`);
   }
+};
+
+export const handleMoveToWishlist = ({
+  product,
+  encodedToken,
+  dispatchWishlist,
+  dispatchCart,
+  setIsRemoving,
+}) => {
+  handleAddToWishlist({ product, encodedToken, dispatchWishlist });
+  handleRemoveFromCart({
+    itemID: product._id,
+    setIsRemoving,
+    encodedToken,
+    dispatchCart,
+  });
 };

@@ -40,7 +40,7 @@ export const WishlistItemCard = ({ product }) => {
           {name.length >= 30 ? sliceProductName(name) : name}
         </h3>
       </div>
-      <div className='card-footer m-xs-tb'>
+      <div className='card-footer m-sm-tb'>
         {isInCart ? (
           <Link to='/cart' className='btn btn-success card-btn'>
             checkout

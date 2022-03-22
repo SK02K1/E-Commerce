@@ -3,17 +3,17 @@ import { createContext, useContext, useState } from 'react';
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [encodedToken, setEncodedToken] = useState(
-    localStorage.getItem('token')
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem('userData')) || {}
   );
 
-  const updateEncodedToken = (token) => {
-    setEncodedToken(token);
-    localStorage.setItem('token', token);
+  const saveUserData = (userData) => {
+    setUserData(userData);
+    localStorage.setItem('userData', JSON.stringify(userData));
   };
 
   return (
-    <AuthContext.Provider value={{ encodedToken, updateEncodedToken }}>
+    <AuthContext.Provider value={{ userData, saveUserData }}>
       {children}
     </AuthContext.Provider>
   );

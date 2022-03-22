@@ -17,7 +17,9 @@ import {
 export const ProductCard = ({ itemInfo }) => {
   const { _id, name, price, img, rating } = itemInfo;
   const [showCardLoader, setShowCardLoader] = useState(false);
-  const { encodedToken } = useAuth();
+  const {
+    userData: { encodedToken },
+  } = useAuth();
   const navigate = useNavigate();
   const {
     cartState: { cartItems },

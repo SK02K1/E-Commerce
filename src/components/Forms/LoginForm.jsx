@@ -13,7 +13,7 @@ const formInitialState = {
 export const LoginForm = () => {
   const [formData, setFormData] = useState(formInitialState);
   const { email, password, rememberMe } = formData;
-  const { updateEncodedToken } = useAuth();
+  const { saveUserData } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || -1;
@@ -32,15 +32,12 @@ export const LoginForm = () => {
 
   const handleLogin = async () => {
     try {
-      const {
-        data: { encodedToken },
-        status,
-      } = await axios.post('/api/auth/login', {
+      const { data, status } = await axios.post('/api/auth/login', {
         email: 'adarshbalika@gmail.com',
         password: 'adarshbalika',
       });
       if (status === 200) {
-        updateEncodedToken(encodedToken);
+        saveUserData(data);
         setFormData(formInitialState);
         navigate(from, { replace: true });
       }

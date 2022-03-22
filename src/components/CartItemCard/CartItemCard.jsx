@@ -12,7 +12,9 @@ import { CardLoader } from '..//Loader/CardLoader';
 
 export const CartItemCard = ({ product }) => {
   const [showCardLoader, setShowCardLoader] = useState(false);
-  const { encodedToken } = useAuth();
+  const {
+    userData: { encodedToken },
+  } = useAuth();
   const { dispatchCart } = useCart();
   const {
     wishlistState: { wishlist },

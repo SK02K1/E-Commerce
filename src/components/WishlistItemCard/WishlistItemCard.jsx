@@ -8,7 +8,9 @@ import { useState } from 'react';
 export const WishlistItemCard = ({ product }) => {
   const { _id, name, price, img } = product;
   const { dispatchWishlist } = useWishlist();
-  const { encodedToken } = useAuth();
+  const {
+    userData: { encodedToken },
+  } = useAuth();
   const [showCardLoader, setShowCardLoader] = useState(false);
   const {
     cartState: { cartItems },

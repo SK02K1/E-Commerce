@@ -3,7 +3,9 @@ import { useAuth, useCart, useWishlist } from '../../contexts';
 import './Navbar.css';
 
 export const Navbar = () => {
-  const { encodedToken } = useAuth();
+  const {
+    userData: { encodedToken },
+  } = useAuth();
   const {
     cartState: { cartItems },
   } = useCart();

@@ -1,8 +1,8 @@
 import './Forms.css';
-import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts';
+import { handleLogin } from '../../services';
 
 const formInitialState = {
   email: 'adarshbalika@gmail.com',
@@ -29,22 +29,6 @@ export const LoginForm = () => {
       ...prevFormData,
       [e.target.name]: e.target.checked,
     }));
-
-  const handleLogin = async () => {
-    try {
-      const { data, status } = await axios.post('/api/auth/login', {
-        email: 'adarshbalika@gmail.com',
-        password: 'adarshbalika',
-      });
-      if (status === 200) {
-        saveUserData(data);
-        setFormData(formInitialState);
-        navigate(from, { replace: true });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <form className='form'>
@@ -89,7 +73,15 @@ export const LoginForm = () => {
         Login
       </button>
       <button
-        onClick={handleLogin}
+        onClick={() =>
+          handleLogin({
+            saveUserData,
+            setFormData,
+            navigate,
+            from,
+            formInitialState,
+          })
+        }
         type='button'
         className='btn btn-primary m-sm-tb'
       >

@@ -9,7 +9,9 @@ export const ProfileCard = () => {
 
   return (
     <div className='profile-card'>
-      <span class='material-icons-outlined profile-icon'>account_circle</span>
+      <span className='material-icons-outlined profile-icon'>
+        account_circle
+      </span>
       <h2 className='text-base m-xs-t'>
         <span>{firstName} </span>
         <span>{lastName}</span>

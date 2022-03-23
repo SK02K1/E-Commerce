@@ -30,3 +30,26 @@ export const handleLogin = async ({
     }
   }
 };
+
+export const handleSignup = async ({
+  e,
+  formData,
+  setFormData,
+  navigate,
+  formInitialState,
+}) => {
+  e.preventDefault();
+  try {
+    const { status } = await axios.post('/api/auth/signup', {
+      ...formData,
+    });
+    if (status === 201) {
+      setFormData(formInitialState);
+      navigate('/login');
+    }
+  } catch (error) {
+    if (error.response.status === 422) {
+      alert('Email already exists');
+    }
+  }
+};

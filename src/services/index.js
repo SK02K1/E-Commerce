@@ -11,4 +11,4 @@ export {
   handleMoveToCart,
 } from './wishlistServices';
 
-export { handleLogin } from './authServices';
+export { handleLogin, handleSignup } from './authServices';

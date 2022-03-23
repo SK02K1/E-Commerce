@@ -22,7 +22,7 @@ export const LoginForm = () => {
   const { saveUserData } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || -1;
+  const from = location.state?.from?.pathname || '/';
 
   const handleInput = (e) =>
     setFormData((prevFormData) => ({

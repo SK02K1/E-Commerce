@@ -15,7 +15,9 @@ export const WishlistProvider = ({ children }) => {
     wishlistReducer,
     initialWishlistState
   );
-  const { encodedToken } = useAuth();
+  const {
+    userData: { encodedToken },
+  } = useAuth();
 
   useEffect(() => {
     if (encodedToken) {
@@ -37,6 +39,11 @@ export const WishlistProvider = ({ children }) => {
           console.error(error);
         }
       })();
+    } else {
+      dispatchWishlist({
+        type: WISHLIST_ACTIONS.INITIALIZE_WISHLIST,
+        payload: { wishlist: [] },
+      });
     }
   }, [encodedToken]);
 

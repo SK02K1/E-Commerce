@@ -10,3 +10,5 @@ export {
   handleRemoveFromWishlist,
   handleMoveToCart,
 } from './wishlistServices';
+
+export { handleLogin, handleSignup } from './authServices';

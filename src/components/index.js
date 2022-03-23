@@ -13,3 +13,5 @@ export { CartItemCard } from './CartItemCard/CartItemCard';
 export { CartDetailsCard } from './CartDetailsCard/CartDetailsCard';
 export { WishlistItemCard } from './WishlistItemCard/WishlistItemCard';
 export { CardLoader } from './Loader/CardLoader';
+export { ProfileCard } from './ProfileCard/ProfileCard';
+export { SignupForm } from './Forms/SignupForm';

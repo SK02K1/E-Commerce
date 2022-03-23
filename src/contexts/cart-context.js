@@ -12,7 +12,9 @@ const initialCartState = {
 
 export const CartProvider = ({ children }) => {
   const [cartState, dispatchCart] = useReducer(cartReducer, initialCartState);
-  const { encodedToken } = useAuth();
+  const {
+    userData: { encodedToken },
+  } = useAuth();
 
   useEffect(() => {
     if (encodedToken) {
@@ -36,6 +38,11 @@ export const CartProvider = ({ children }) => {
           console.log(error.response);
         }
       })();
+    } else {
+      dispatchCart({
+        type: CART_ACTIONS.INITIALIZE_CART,
+        payload: { cart: [] },
+      });
     }
   }, [encodedToken]);
 

@@ -1,28 +1,19 @@
-import './Forms.css';
 import { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../contexts';
-import { handleLogin } from '../../services';
-
-const testCredentials = {
-  email: 'adarshbalika@gmail.com',
-  password: 'adarshbalika',
-  rememberMe: true,
-};
+import { Link, useNavigate } from 'react-router-dom';
+import { handleSignup } from '../../services/authServices';
 
 const formInitialState = {
+  firstName: '',
+  lastName: '',
   email: '',
   password: '',
-  rememberMe: false,
+  termsAndConditions: false,
 };
 
-export const LoginForm = () => {
+export const SignupForm = () => {
   const [formData, setFormData] = useState(formInitialState);
-  const { email, password, rememberMe } = formData;
-  const { saveUserData } = useAuth();
+  const { firstName, lastName, email, password, termsAndConditions } = formData;
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || '/';
 
   const handleInput = (e) =>
     setFormData((prevFormData) => ({
@@ -39,22 +30,45 @@ export const LoginForm = () => {
   return (
     <form
       onSubmit={(e) =>
-        handleLogin({
+        handleSignup({
           e,
-          email,
-          password,
-          saveUserData,
-          setFormData,
+          formData,
           navigate,
-          from,
+          setFormData,
           formInitialState,
         })
       }
       className='form'
     >
-      <h1 className='text-xl text-center m-xs-tb'>Login</h1>
+      <h1 className='text-xl text-center m-xs-tb'>Signup</h1>
+      <label className='m-sm-t' htmlFor='firstName'>
+        firstname
+      </label>
+      <input
+        onChange={handleInput}
+        className='input m-xs-t'
+        type='text'
+        name='firstName'
+        id='firstName'
+        value={firstName}
+        placeholder='Enter your firstname'
+        required
+      />
+      <label className='m-sm-t' htmlFor='lastName'>
+        lastname
+      </label>
+      <input
+        onChange={handleInput}
+        className='input m-xs-t'
+        type='lastName'
+        name='lastName'
+        id='lastName'
+        value={lastName}
+        placeholder='Enter your lastname'
+        required
+      />
       <label className='m-sm-t' htmlFor='email'>
-        Email address
+        Email
       </label>
       <input
         onChange={handleInput}
@@ -79,26 +93,24 @@ export const LoginForm = () => {
         placeholder='Enter your password'
         required
       />
-      <label className='m-sm-t' htmlFor='remember-me'>
+      <label className='m-sm-t' htmlFor='termsAndConditions'>
         <input
           onChange={handleToggle}
           type='checkbox'
-          name='rememberMe'
-          id='remember-me'
-          checked={rememberMe}
+          name='termsAndConditions'
+          id='termsAndConditions'
+          checked={termsAndConditions}
         />
-        <span className='text-sm m-xs-l'>Remember me</span>
+        <span className='text-sm m-xs-l'>I accept all Terms & Conditions</span>
       </label>
-      <button className='btn btn-primary m-sm-t'>Login</button>
       <button
-        type='button'
-        onClick={() => setFormData(testCredentials)}
         className='btn btn-primary m-sm-tb'
+        disabled={!termsAndConditions}
       >
-        Use test credentials
+        Signup
       </button>
-      <Link className='form-link' to='/signup'>
-        <span>Create New Account</span>
+      <Link className='form-link' to='/login'>
+        <span>Already have account</span>
         <span className='material-icons-outlined'> chevron_right </span>
       </Link>
     </form>

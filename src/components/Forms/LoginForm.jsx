@@ -4,10 +4,16 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts';
 import { handleLogin } from '../../services';
 
-const formInitialState = {
+const testCredentials = {
   email: 'adarshbalika@gmail.com',
   password: 'adarshbalika',
   rememberMe: true,
+};
+
+const formInitialState = {
+  email: '',
+  password: '',
+  rememberMe: false,
 };
 
 export const LoginForm = () => {
@@ -31,7 +37,21 @@ export const LoginForm = () => {
     }));
 
   return (
-    <form className='form'>
+    <form
+      onSubmit={(e) =>
+        handleLogin({
+          e,
+          email,
+          password,
+          saveUserData,
+          setFormData,
+          navigate,
+          from,
+          formInitialState,
+        })
+      }
+      className='form'
+    >
       <h1 className='text-xl text-center m-xs-tb'>Login</h1>
       <label className='m-sm-t' htmlFor='email'>
         Email address
@@ -69,23 +89,13 @@ export const LoginForm = () => {
         />
         <span className='text-sm m-xs-l'>Remember me</span>
       </label>
-      <button type='button' className='btn btn-primary m-sm-t' disabled={true}>
-        Login
-      </button>
+      <button className='btn btn-primary m-sm-t'>Login</button>
       <button
-        onClick={() =>
-          handleLogin({
-            saveUserData,
-            setFormData,
-            navigate,
-            from,
-            formInitialState,
-          })
-        }
         type='button'
+        onClick={() => setFormData(testCredentials)}
         className='btn btn-primary m-sm-tb'
       >
-        Login as guest
+        Use test credentials
       </button>
       <Link className='form-link' to='/signup'>
         <span>Create New Account</span>

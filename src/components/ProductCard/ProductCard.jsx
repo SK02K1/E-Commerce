@@ -31,6 +31,7 @@ export const ProductCard = ({ itemInfo }) => {
   } = useWishlist();
 
   const isInWishlist = isAlreadyInWishlist(wishlist, itemInfo);
+  const showSingleProduct = () => navigate(`/products/${_id}`);
 
   return (
     <div className='card'>
@@ -58,7 +59,7 @@ export const ProductCard = ({ itemInfo }) => {
       >
         favorite
       </span>
-      <div className='card-header m-xs-tb'>
+      <div onClick={showSingleProduct} className='card-header m-xs-tb'>
         <img className='card-img m-xs-tb' src={img} alt={name} />
       </div>
       <div className='card-body m-xs-tb'>

@@ -24,7 +24,7 @@ export const CartItemCard = ({ product }) => {
   const isInWishlist = isAlreadyInWishlist(wishlist, product);
 
   return (
-    <div className='card'>
+    <div className='card cart-item-card'>
       <CardLoader showLoader={showCardLoader} />
       <div className='card-header m-xs-tb'>
         <img className='card-img m-xs-tb' src={img} alt={name} />

@@ -7,3 +7,7 @@
 .inactive:hover {
   color: var(--gray);
 }
+
+.card-header {
+  cursor: pointer;
+}

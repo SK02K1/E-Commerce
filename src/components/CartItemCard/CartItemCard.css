@@ -14,6 +14,9 @@
 }
 
 .btn[disabled] {
-  background-color: var(--clr-primary-300);
   cursor: not-allowed;
+}
+
+.cart-item-card .btn[disabled] {
+  background-color: var(--clr-primary-300);
 }

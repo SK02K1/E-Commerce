@@ -1,0 +1,32 @@
+.single-product-card {
+  box-shadow: var(--shadow);
+  padding: 0.5rem;
+}
+
+.single-product-card .btn {
+  border-radius: 0;
+  flex-grow: 1;
+}
+
+.single-product-card .product-controls {
+  display: flex;
+  justify-content: stretch;
+}
+
+@media screen and (min-width: 600px) {
+  .single-product-card {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .single-product-card {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .single-product-card {
+    width: 30%;
+  }
+}

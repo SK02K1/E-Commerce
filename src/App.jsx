@@ -4,6 +4,7 @@ import {
   Cart,
   Home,
   Login,
+  NotFound,
   Products,
   Profile,
   Signup,
@@ -23,6 +24,7 @@ function App() {
           <Route path='/products/:productID' element={<SingleProduct />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
+          <Route path='*' element={<NotFound />} />
 
           {/* Private routes */}
           <Route element={<PrivateRoute />}>

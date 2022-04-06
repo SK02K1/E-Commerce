@@ -1,13 +1,33 @@
 import './SingleProduct.css';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAxios } from '../../hooks';
 import { Loader } from '../../components';
+import { useAuth, useCart, useWishlist } from '../../contexts';
+import { isAlreadyInCart, isAlreadyInWishlist } from '../../utils';
+import {
+  handleAddToCart,
+  handleAddToWishlist,
+  handleRemoveFromWishlist,
+} from '../../services';
 
 export const SingleProduct = () => {
   const [product, setProduct] = useState({});
+  const [showCardLoader, setShowCardLoader] = useState(false);
   const { productID } = useParams();
+  const navigate = useNavigate();
   const { data, isLoaderActive } = useAxios(`/api/products/${productID}`);
+  const {
+    userData: { encodedToken },
+  } = useAuth();
+  const {
+    cartState: { cartItems },
+    dispatchCart,
+  } = useCart();
+  const {
+    wishlistState: { wishlist },
+    dispatchWishlist,
+  } = useWishlist();
 
   useEffect(() => {
     if (data?.product) {
@@ -15,7 +35,36 @@ export const SingleProduct = () => {
     }
   }, [data]);
 
-  const { name, price, img, rating, description } = product;
+  const { _id, name, price, img, rating, description } = product;
+  const isInCart = isAlreadyInCart(cartItems, product);
+  const isInWishlist = isAlreadyInWishlist(wishlist, product);
+
+  const cartBtnHandler = () => {
+    handleAddToCart({
+      itemInfo: product,
+      encodedToken,
+      dispatchCart,
+      setShowCardLoader,
+      navigate,
+    });
+  };
+
+  const wishlistBtnHandler = () => {
+    isInWishlist
+      ? handleRemoveFromWishlist({
+          itemID: _id,
+          encodedToken,
+          dispatchWishlist,
+          setShowCardLoader,
+        })
+      : handleAddToWishlist({
+          product,
+          encodedToken,
+          dispatchWishlist,
+          setShowCardLoader,
+          navigate,
+        });
+  };
 
   return (
     <div className='main-content'>
@@ -31,8 +80,26 @@ export const SingleProduct = () => {
             <p className='m-sm-tb'>{description}</p>
           </div>
           <div className='product-controls'>
-            <button className='btn btn-primary'>add to cart</button>
-            <button className='btn btn-secondary'>add to wishlist</button>
+            {isInCart ? (
+              <Link className='btn btn-primary' to='/cart'>
+                Go to cart
+              </Link>
+            ) : (
+              <button
+                onClick={cartBtnHandler}
+                className='btn btn-primary'
+                disabled={showCardLoader}
+              >
+                Add to cart
+              </button>
+            )}
+            <button
+              onClick={wishlistBtnHandler}
+              className='btn btn-secondary'
+              disabled={showCardLoader}
+            >
+              {isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+            </button>
           </div>
         </div>
       )}

@@ -16,7 +16,7 @@ import {
 function App() {
   return (
     <div className='App'>
-      <Toaster />
+      <Toaster position='bottom-center' />
       <Navbar />
       <Wrapper>
         <Routes>

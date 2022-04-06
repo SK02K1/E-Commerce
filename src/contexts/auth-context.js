@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const AuthContext = createContext(null);
 
@@ -13,9 +14,22 @@ export const AuthProvider = ({ children }) => {
   };
 
   const removeUserData = (navigate) => {
-    setUserData({});
-    localStorage.removeItem('userData');
-    navigate('/');
+    const logoutPromise = new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('Successfully logged out');
+      }, 1200);
+    });
+
+    logoutPromise.then(() => {
+      navigate('/');
+      setUserData({});
+      localStorage.removeItem('userData');
+    });
+
+    toast.promise(logoutPromise, {
+      loading: 'Logging out',
+      success: (msg) => msg,
+    });
   };
 
   return (

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { CART_ACTIONS } from '../utils';
 import { handleAddToWishlist } from './wishlistServices';
+import toast from 'react-hot-toast';
 
 export const handleAddToCart = async ({
   itemInfo: product,
@@ -31,8 +32,10 @@ export const handleAddToCart = async ({
           type: CART_ACTIONS.ADD_TO_CART,
           payload: { updatedCart: cart },
         });
+        toast.success('Product added to your cart');
       }
     } catch (error) {
+      toast.error('Failed to add product in the cart');
       console.log(`Error in adding product to cart: ${error.message}`);
     } finally {
       setShowCardLoader(false);
@@ -62,8 +65,10 @@ export const handleRemoveFromCart = async ({
         type: CART_ACTIONS.REMOVE_FROM_CART,
         payload: { updatedCart: cart },
       });
+      toast.success('Product removed from cart');
     }
   } catch (error) {
+    toast.error('Failed to remove product from the cart');
     console.log(`Error in removing item from cart: ${error.message}`);
   }
 };
@@ -99,8 +104,10 @@ export const handleQuantityChange = async ({
         type: CART_ACTIONS.ITEM_QUANTITY_CHANGE,
         payload: { updatedQuanityCart: cart },
       });
+      toast.success('Product quantity updated');
     }
   } catch (error) {
+    toast.error('Failed to update product quantity');
     console.log(`Error in updating item quantity: ${error.message}`);
   }
 };

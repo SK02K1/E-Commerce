@@ -1,7 +1,9 @@
 import { WishlistItemCard } from '../../components';
 import { useWishlist } from '../../contexts';
+import { useDocumentTitle } from '../../hooks';
 
 export const Wishlist = () => {
+  useDocumentTitle('Wishlist');
   const {
     wishlistState: { wishlist },
   } = useWishlist();

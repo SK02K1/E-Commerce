@@ -6,7 +6,7 @@ import {
   LargeScreenFilter,
 } from '../../components';
 import { useProducts } from '../../contexts';
-import { useAxios } from '../../hooks';
+import { useAxios, useDocumentTitle } from '../../hooks';
 import './Products.css';
 import {
   getSortedData,
@@ -17,6 +17,7 @@ import {
 } from '../../utils';
 
 export const Products = () => {
+  useDocumentTitle('Products');
   const {
     data: { products = [] },
     isLoaderActive,

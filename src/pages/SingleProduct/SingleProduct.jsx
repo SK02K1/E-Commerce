@@ -1,7 +1,7 @@
 import './SingleProduct.css';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useAxios } from '../../hooks';
+import { useAxios, useDocumentTitle } from '../../hooks';
 import { Loader } from '../../components';
 import { useAuth, useCart, useWishlist } from '../../contexts';
 import { isAlreadyInCart, isAlreadyInWishlist } from '../../utils';
@@ -12,6 +12,7 @@ import {
 } from '../../services';
 
 export const SingleProduct = () => {
+  const { setDocumentTitle } = useDocumentTitle('Products');
   const [product, setProduct] = useState({});
   const [showCardLoader, setShowCardLoader] = useState(false);
   const { productID } = useParams();
@@ -32,8 +33,9 @@ export const SingleProduct = () => {
   useEffect(() => {
     if (data?.product) {
       setProduct(data.product);
+      setDocumentTitle(data.product.name);
     }
-  }, [data]);
+  }, [data, setDocumentTitle]);
 
   const { _id, name, price, img, rating, description } = product;
   const isInCart = isAlreadyInCart(cartItems, product);

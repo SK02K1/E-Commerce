@@ -1,7 +1,8 @@
 import { Search, Hero, CategoryCard, Loader } from '../../components';
-import { useAxios } from '../../hooks';
+import { useAxios, useDocumentTitle } from '../../hooks';
 
 export const Home = () => {
+  useDocumentTitle('Home');
   const {
     data: { categories },
     isLoaderActive,

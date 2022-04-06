@@ -9,8 +9,8 @@ import {
   Profile,
   Signup,
   SingleProduct,
+  Wishlist,
 } from './pages';
-import { Wishlist } from './pages/Wishlist/Wishlist';
 
 function App() {
   return (

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 export const handleLogin = async ({
   e,
@@ -20,13 +21,14 @@ export const handleLogin = async ({
       saveUserData(data);
       setFormData(formInitialState);
       navigate(from, { replace: true });
+      toast.success('Successfully logged in');
     } else if (status === 201) {
-      alert('Wrong Credentials');
+      toast.error('Wrong Credentials');
     }
   } catch (error) {
     const { status } = error.response;
     if (status === 404) {
-      alert('User not found');
+      toast.error('User not found');
     }
   }
 };
@@ -46,10 +48,11 @@ export const handleSignup = async ({
     if (status === 201) {
       setFormData(formInitialState);
       navigate('/login');
+      toast.success('Account created, login now');
     }
   } catch (error) {
     if (error.response.status === 422) {
-      alert('Email already exists');
+      toast.error('Account with this email already exists');
     }
   }
 };

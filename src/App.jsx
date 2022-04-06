@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
 import { Navbar, PrivateRoute, Wrapper } from './components';
 import {
@@ -15,6 +16,7 @@ import {
 function App() {
   return (
     <div className='App'>
+      <Toaster />
       <Navbar />
       <Wrapper>
         <Routes>

@@ -1,8 +1,10 @@
 import { CartDetailsCard, CartItemCard } from '../../components';
 import { useCart } from '../../contexts';
+import { useDocumentTitle } from '../../hooks';
 import './Cart.css';
 
 export const Cart = () => {
+  useDocumentTitle('Cart');
   const { cartState } = useCart();
   const { cartItems } = cartState;
   const itemsInCart = cartItems.length;

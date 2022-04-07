@@ -1,19 +1,22 @@
+import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
 import { Navbar, PrivateRoute, Wrapper } from './components';
 import {
   Cart,
   Home,
   Login,
+  NotFound,
   Products,
   Profile,
   Signup,
   SingleProduct,
+  Wishlist,
 } from './pages';
-import { Wishlist } from './pages/Wishlist/Wishlist';
 
 function App() {
   return (
     <div className='App'>
+      <Toaster position='bottom-center' />
       <Navbar />
       <Wrapper>
         <Routes>
@@ -23,6 +26,7 @@ function App() {
           <Route path='/products/:productID' element={<SingleProduct />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
+          <Route path='*' element={<NotFound />} />
 
           {/* Private routes */}
           <Route element={<PrivateRoute />}>

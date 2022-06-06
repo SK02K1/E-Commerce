@@ -20,3 +20,7 @@
 .icon {
   font-size: 2rem;
 }
+
+.navbar .nav-link {
+  padding-bottom: 0;
+}

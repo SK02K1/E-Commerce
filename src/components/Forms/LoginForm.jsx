@@ -5,8 +5,8 @@ import { useAuth } from '../../contexts';
 import { handleLogin } from '../../services';
 
 const testCredentials = {
-  email: 'adarshbalika@gmail.com',
-  password: 'adarshbalika',
+  email: 'ksourabh458@gmail.com',
+  password: '12345678',
   rememberMe: true,
 };
 

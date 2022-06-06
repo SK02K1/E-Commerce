@@ -33,21 +33,36 @@ export const Products = () => {
     filterByPrice
   )(products, state);
 
+  const foundProductsCount = filteredProducts.length;
+
   return (
     <>
       <Search />
       <SmallScreenFilter />
       <main className='main-wrapper'>
         <LargeScreenFilter />
-        {isLoaderActive ? (
-          <Loader />
-        ) : (
-          <div className='grid-container auto main-content'>
-            {filteredProducts.map((itemInfo) => (
-              <ProductCard key={itemInfo.id} itemInfo={itemInfo} />
-            ))}
-          </div>
-        )}
+        <div className='main-content'>
+          {isLoaderActive ? (
+            <Loader />
+          ) : (
+            <>
+              <div className='grid-container auto m-xs-b'>
+                <h2 className='text-lg'>
+                  {foundProductsCount
+                    ? `Showing ${foundProductsCount} ${
+                        foundProductsCount > 1 ? 'products' : 'product'
+                      }`
+                    : `No product found`}
+                </h2>
+              </div>
+              <div className='grid-container auto'>
+                {filteredProducts.map((itemInfo) => (
+                  <ProductCard key={itemInfo.id} itemInfo={itemInfo} />
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </main>
       {error && <p className='text-center'>{error.message}</p>}
     </>

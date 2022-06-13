@@ -19,6 +19,14 @@ export const Navbar = () => {
       </div>
       <ul className='links'>
         <li>
+          <Link to='/products' className='nav-link'>
+            <div className='icon-badge'>
+              <span className='material-icons-outlined icon'>store</span>
+            </div>
+          </Link>
+          <p className='text-xs text-center'>Store</p>
+        </li>
+        <li>
           <Link to='/cart' className='nav-link'>
             <div className='icon-badge'>
               <span className='material-icons-outlined icon'>
@@ -27,6 +35,7 @@ export const Navbar = () => {
               <div>{cartItems.length}</div>
             </div>
           </Link>
+          <p className='text-xs text-center'>Cart</p>
         </li>
         <li>
           <Link to='/wishlist' className='nav-link'>
@@ -37,6 +46,7 @@ export const Navbar = () => {
               <div>{wishlist.length}</div>
             </div>
           </Link>
+          <p className='text-xs text-center'>wishlist</p>
         </li>
         <li>
           {encodedToken ? (
@@ -52,6 +62,9 @@ export const Navbar = () => {
               </div>
             </Link>
           )}
+          <p className='text-xs text-center'>
+            {encodedToken ? 'Profile' : 'Login'}
+          </p>
         </li>
       </ul>
     </nav>

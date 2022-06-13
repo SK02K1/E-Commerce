@@ -1,16 +1,7 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-export const handleLogin = async ({
-  e,
-  email,
-  password,
-  saveUserData,
-  setFormData,
-  navigate,
-  from,
-  formInitialState,
-}) => {
+export const handleLogin = async ({ e, email, password, saveUserData }) => {
   e.preventDefault();
   try {
     const { data, status } = await axios.post('/api/auth/login', {
@@ -19,8 +10,6 @@ export const handleLogin = async ({
     });
     if (status === 200) {
       saveUserData(data);
-      setFormData(formInitialState);
-      navigate(from, { replace: true });
       toast.success('Successfully logged in');
     } else if (status === 201) {
       toast.error('Wrong Credentials');
